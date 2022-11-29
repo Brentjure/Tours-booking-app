@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 8,
     select: false,
-    required: [true, ''],
+    required: [true, 'Please provide your password.'],
   },
   passwordConfirm: {
     type: String,
@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
       },
       message: 'Password are not the same!',
     },
+    role: {
+      type: String,
+      default: 'user',
+      enum: ['user', 'admin', 'lead-guide', 'guide'],
+    },
   },
   photo: {
     type: String,
@@ -36,6 +41,11 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
+    select: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
     select: false,
   },
 });
