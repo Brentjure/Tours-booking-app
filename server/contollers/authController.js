@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
+const { findOne } = require('../Models/userModel');
 const User = require('../Models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const Email = require('../utils/email');
 
 const signToken = (id) =>
   jwt.sign(id, process.env.JWT_SECRET, {
@@ -114,4 +116,34 @@ exports.restrictTo =
     next();
   };
 
-exports.forgotPassword = catchAsync(async (req, res, next) => {});
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  const user = await findOne({ email: req.body.email });
+  if (!user)
+    return next(
+      new AppError('There is not user with that email address!', 404)
+    );
+
+  const resetToken = await user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  try {
+    const resetURL = `${req.protocol}://${req.get(
+      'host'
+    )}/api/v1/users/resetPassword/${resetToken}`;
+
+    await new Email(user, resetURL).sendPasswordReset();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Token sent to email!',
+    });
+  } catch (error) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError('There was an error sending the email. Try again later!')
+    );
+  }
+});
