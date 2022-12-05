@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoute');
@@ -7,6 +8,9 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./contollers/errorController');
 
 const app = express();
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
