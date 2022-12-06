@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const htmlToText = require('html-to-text');
+const { htmlToText } = require('html-to-text');
 const pug = require('pug');
 
 module.exports = class Email {
@@ -21,10 +21,10 @@ module.exports = class Email {
       });
 
     return nodemailer.createTransport({
-      host: process.env.EMAILHOST,
+      host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT,
       auth: {
-        user: process.env.EMAIL_USENAME,
+        user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
       },
     });
@@ -41,7 +41,7 @@ module.exports = class Email {
       from: this.from,
       to: this.to,
       subject,
-      text: htmlToText.fromString(html),
+      text: htmlToText(html),
     };
 
     await this.newTransport().sendMail(mailOptions);
