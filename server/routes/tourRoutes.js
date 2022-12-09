@@ -1,7 +1,10 @@
 const express = require('express');
 const tourController = require('../contollers/tourController');
+const reviewRouter = require('./reviewRoutes');
 
 const router = express.Router();
+
+router.use('/:tourId/reviews', reviewRouter);
 
 router
   .route('/')
@@ -11,7 +14,11 @@ router
 router
   .route('/:id')
   .get(tourController.getTour)
-  .patch(tourController.updateTour)
+  .patch(
+    tourController.uploadTourImages,
+    tourController.resizeTourImages,
+    tourController.updateTour
+  )
   .delete(tourController.deleteTour);
 
 module.exports = router;

@@ -32,7 +32,6 @@ const upload = multer({
 exports.uploadUserphoto = upload.single('photo');
 
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
-  console.log('file', req.file);
   if (!req.file) return next();
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
