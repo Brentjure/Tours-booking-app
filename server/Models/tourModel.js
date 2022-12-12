@@ -111,6 +111,10 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
+tourSchema.index({ price: 1, averageRatings: -1 });
+tourSchema.index({ slug: 1 });
+tourSchema.index({ startLocation: '2dsphere' });
+
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
