@@ -1,12 +1,16 @@
-import classes from './Hero.module.css';
+import classes from './HeroSection.module.css';
 import heroImg from '../images/hero-3.jpg';
 
-const Hero = (props) => {
+const HeroSection = (props) => {
   return (
     <section className={classes['section-hero']}>
       <div className={classes.hero}>
         <div className={classes['hero-section-img-container']}>
-          <img className={classes['hero-img']} src={heroImg} alt="hero image" />
+          <img
+            className={classes['hero-img']}
+            src={heroImg}
+            alt="beach party"
+          />
         </div>
         <div className={classes['hero-content']}>
           <div className={classes['content-container']}>
@@ -20,4 +24,4 @@ const Hero = (props) => {
   );
 };
 
-export default Hero;
+export default HeroSection;

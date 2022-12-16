@@ -41,6 +41,7 @@
 }
 
 .hero-img {
+  filter: brightness(50%);
   width: 100%;
   height: 52rem;
   object-fit: cover;

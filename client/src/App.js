@@ -1,12 +1,13 @@
 import { Fragment } from 'react';
 
-import Hero from './components/Hero';
+import HeroSection from './components/HeroSection';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
-    <Fragment>
-      <Hero />
-    </Fragment>
+    <Layout>
+      <HeroSection />
+    </Layout>
   );
 }
 
