@@ -82,3 +82,34 @@
   outline: none;
   box-shadow: 0 0 0 0.8rem #fdf2e980;
 }
+
+/* Bellow 944px (Tablets) */
+@media (max-width: 59em) {
+  .cta {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  .cta_form {
+    grid-template-columns: 1fr;
+  }
+
+  .btn_form {
+    margin-top: 1.2rem;
+  }
+}
+
+/* Bellow 544px (Phone) */
+@media (max-width: 34em) {
+  .cta {
+    grid-template-columns: 1fr;
+  }
+
+  .cta_text_box {
+    padding: 3.2rem;
+  }
+
+  .cta_img_box {
+    height: 32rem;
+    grid-row: 1;
+  }
+}
