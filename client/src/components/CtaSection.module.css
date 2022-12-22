@@ -1,0 +1,84 @@
+.section_cta {
+  /* top / right / bottom / left */
+  padding: 12.8rem 0 12.8rem 0;
+
+  /* top / horizontal / left */
+  /* padding: 9.6rem 0 12.8rem; */
+}
+
+.cta {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+  border-radius: 50px;
+  /* height: 60rem; */
+
+  overflow: hidden;
+  background-image: linear-gradient(
+    to right bottom,
+    hsla(211, 85%, 87%, 0.349),
+    hsla(211, 85%, 78%, 0.342)
+  );
+}
+
+.cta_text_box {
+  color: #002246;
+  padding: 4.8rem 6.4rem 6.4rem 6.4rem;
+}
+
+.cta .heading-secondary {
+  color: #002246;
+}
+
+.cta_text {
+  font-size: 1.8rem;
+  line-height: 1.8;
+}
+
+.cta_img_box {
+  background-image: linear-gradient(
+      to right bottom,
+      hsla(211, 85%, 87%, 0.349),
+      hsla(211, 85%, 78%, 0.342)
+    ),
+    url('../images/cta-img-2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.cta_form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3.2rem;
+  row-gap: 2.4rem;
+  font-family: inherit;
+}
+
+.cta_form label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+
+.cta_form input,
+.cta_form select {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.8rem;
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  background-color: #fdf2e9;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cta_form input::placeholder {
+  color: #aaa;
+}
+
+.cta *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.8rem #fdf2e980;
+}

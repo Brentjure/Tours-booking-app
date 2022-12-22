@@ -1,0 +1,53 @@
+.section_testimonials {
+  background-color: #e6f1f7;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  align-items: center;
+}
+
+.testimonial_container {
+  padding: 9.6rem;
+}
+
+.testimonials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 4.8rem;
+  column-gap: 8rem;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  padding: 1.6rem;
+}
+
+/* Bellow 1200px (Landscape tablets) */
+@media (max-width: 75em) {
+  .testimonials_container {
+    padding: 9.6rem 3.2rem;
+  }
+}
+
+/* Bellow 944px (Tablets)*/
+@media (max-width: 59em) {
+  .section_testimonials {
+    grid-template-columns: 1fr;
+  }
+  .gallery {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Bellow 704px (Phones) */
+@media (max-width: 34em) {
+  .testimonials {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+}

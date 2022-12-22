@@ -1,0 +1,60 @@
+.section-tours {
+  padding: 9.6rem 0;
+}
+
+.tours {
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+
+  display: grid;
+  column-gap: 6.4rem;
+  row-gap: 9.6rem;
+
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.all_tours {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-top: 4.8rem;
+}
+
+.link:link,
+.link:visited {
+  display: inline-block;
+  color: #d31e3d;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: all 0.3s;
+}
+
+.link:hover,
+.link:active {
+  color: #94152b;
+  border-bottom: 1px solid transparent;
+}
+
+/* Bellow 1200px (Landscape Tablets) */
+@media (max-width: 75em) {
+  .tours {
+    column-gap: 4.8rem;
+    row-gap: 6.4rem;
+  }
+}
+
+/* Bellow 944px (Tablets) */
+@media (max-width: 59em) {
+  .tours {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Bellow 544px (Phones) */
+@media (max-width: 34em) {
+  .tours {
+    grid-template-columns: 1fr;
+    row-gap: 4.8rem;
+  }
+}

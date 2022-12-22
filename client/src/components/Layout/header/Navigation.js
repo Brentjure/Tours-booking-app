@@ -1,4 +1,3 @@
-import { useReducer } from 'react';
 import classes from './Navigation.module.css';
 // a.main-nav-link.loggedin(href='/me')
 //             img(class="nav-user-photo" src=`img/users/${user.photo}`, alt=`Photo of ${user.name}`)

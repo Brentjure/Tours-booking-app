@@ -15,7 +15,7 @@ const HeroSection = (props) => {
         <div className={classes['hero-content']}>
           <div className={classes['content-container']}>
             <p className={classes['heading-primary']}>
-              Live adventures you've never had.
+              Live adventures you've never had!
             </p>
           </div>
         </div>

@@ -1,0 +1,13 @@
+.gallery_item {
+  overflow: hidden;
+}
+
+.gallery_item img {
+  display: block;
+  width: 100%;
+  transition: all 0.4s;
+}
+
+.gallery_item img:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,33 @@
+.logo_col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer_logo {
+  display: block;
+  margin-bottom: 3.2rem;
+}
+
+.social_links {
+  list-style-type: none;
+  display: flex;
+  gap: 2.4rem;
+}
+
+.social_icon {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.copyright {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #767676;
+  margin-top: auto;
+}
+
+.footer_heading {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 4rem;
+}

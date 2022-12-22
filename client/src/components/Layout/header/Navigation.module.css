@@ -30,3 +30,9 @@
 .main-nav-link.nav-cta:active {
   background-color: #00448d;
 }
+
+@media (max-width: 75rem) {
+  .main-nav-list {
+    gap: 3.2rem;
+  }
+}
