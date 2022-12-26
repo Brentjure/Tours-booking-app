@@ -18,3 +18,28 @@
 .container_footer:not(:last-child) {
   margin-bottom: 6.4rem;
 }
+
+/* Bellow 1200px (Landscape Tablets) */
+
+@media (max-width: 75em) {
+  .container_footer {
+    column-gap: 4.8rem;
+    row-gap: 6.4rem;
+  }
+}
+
+/* Bellow 704px (Smaller Tablets) */
+
+@media (max-width: 44em) {
+  .container_footer {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Bellow 544px (Phones) */
+
+@media (max-width: 34em) {
+  .container_footer {
+    row-gap: 4.8rem;
+  }
+}

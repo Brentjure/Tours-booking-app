@@ -24,7 +24,7 @@ const LogoCol = () => {
         </li>
       </ul>
       <p className={classes.copyright}>
-        copyright &copy; <span className={classes.year}>2027</span> by Brent
+        copyright &copy; <span className={classes.year}>2022</span> by Brent
         Otieno, Inc. All right reserved
       </p>
     </div>

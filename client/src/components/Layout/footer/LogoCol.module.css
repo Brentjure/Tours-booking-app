@@ -31,3 +31,10 @@
   font-weight: 500;
   margin-bottom: 4rem;
 }
+
+/* Bellow 704px (Smaller Tablets) */
+@media (max-width: 44em) {
+  .logo_col {
+    grid-column: span 3;
+  }
+}

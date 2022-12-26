@@ -1,20 +1,12 @@
 import { Fragment } from 'react';
+import Account from './pages/Account';
 
-import HeroSection from './components/HeroSection';
-import TourSection from './components/TourSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import CtaSection from './components/CtaSection';
-import Layout from './components/Layout/Layout';
-
-function App() {
+const App = () => {
   return (
-    <Layout>
-      <HeroSection />
-      <TourSection />
-      <TestimonialsSection />
-      <CtaSection />
-    </Layout>
+    <Fragment>
+      <Account />
+    </Fragment>
   );
-}
+};
 
 export default App;

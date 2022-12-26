@@ -33,3 +33,9 @@
 .footer_link:active {
   color: #555;
 }
+
+@media (max-width: 44em) {
+  .address_col {
+    grid-column: span 3;
+  }
+}
