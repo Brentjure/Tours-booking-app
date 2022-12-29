@@ -1,0 +1,37 @@
+.acc_container {
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+
+  display: grid;
+  column-gap: 6.4rem;
+  row-gap: 9.6rem;
+
+  grid-template-columns: 30fr 70fr;
+  padding: 4.8rem 0;
+}
+
+.content {
+  background-color: #e6f1f7;
+  padding: 4.8rem;
+  border-radius: 1.1rem;
+  align-items: centre;
+}
+
+.btn_mobile_nav {
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+
+  display: none;
+}
+
+.icon_mobile_nav {
+  height: 4.8rem;
+  width: 4.8rem;
+  color: #333;
+}

@@ -1,0 +1,42 @@
+.side_menu {
+  background-color: #e6f1f7;
+  border-radius: 1.1rem;
+  /* padding: 3.2rem; */
+  overflow: hidden;
+  padding: 3.2rem 0;
+}
+.side_menu_list {
+  list-style: none;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+.side_el {
+  list-style: none;
+  text-decoration: none;
+  color: #555;
+
+  height: 2.4rem;
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+  padding-left: 3.2rem;
+  padding-top: 3.2rem;
+  padding-bottom: 3.2rem;
+}
+
+.active,
+.side_el:hover {
+  border-left: 0.5rem solid #94152b;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.side_menu_icon {
+  height: 9.8rem;
+  width: 9.8rem;
+}
+
+.side_el span {
+  font-size: 1.6rem;
+}
