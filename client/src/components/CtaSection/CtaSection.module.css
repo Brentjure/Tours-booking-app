@@ -41,7 +41,7 @@
       hsla(211, 85%, 87%, 0.349),
       hsla(211, 85%, 78%, 0.342)
     ),
-    url('../images/cta-img-2.jpg');
+    url('../../images/cta-img-2.jpg');
   background-size: cover;
   background-position: center;
 }

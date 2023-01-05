@@ -54,7 +54,7 @@ const CtaSection = () => {
                 />
               </div>
 
-              <button class="btn btn--form">Sign up now</button>
+              <button class="button btn--form">Sign up now</button>
             </form>
           </div>
           <div

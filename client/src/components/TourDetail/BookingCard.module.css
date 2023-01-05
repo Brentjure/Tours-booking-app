@@ -1,0 +1,75 @@
+.card {
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  border-radius: 11px;
+  padding: 2.4rem;
+
+  font-size: 1.6rem;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin-bottom: 2.4rem;
+}
+
+.price {
+  font-size: 2.4rem;
+}
+
+.tour_attribute {
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.tour_icon {
+  color: #d31e3d;
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+.dates {
+  border: solid 1px #eee;
+  border-radius: 11px;
+  padding: 2.4rem;
+}
+
+.container_dates {
+  /* margin-bottom: 2.4rem; */
+  padding-bottom: 0.8rem;
+}
+.start_date {
+  display: flex;
+  justify-content: space-between;
+  /* border-right: solid 1px #eee; */
+  /* padding: 2.4rem 0; */
+}
+
+.guests {
+  padding-top: 0.8rem;
+  border-top: solid 1px #eee;
+}
+
+.btn_booking {
+  border-radius: 11px !important;
+  margin: 2.4rem 0;
+  width: 100%;
+}
+
+.fees {
+  list-style: none;
+  border-bottom: solid 1px #eee;
+}
+.fees_attribute {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+}
+.total {
+  padding-top: 2.4rem;
+  display: flex;
+  justify-content: space-between;
+
+  font-weight: 600;
+}

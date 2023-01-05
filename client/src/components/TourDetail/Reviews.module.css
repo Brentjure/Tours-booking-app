@@ -1,0 +1,27 @@
+.review_title {
+  display: flex;
+  align-items: center;
+}
+
+.customer_ratings {
+  font-size: 1.8rem;
+  /* margin-top: 2.4rem; */
+}
+.reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3.2rem;
+  padding-top: 2.4rem;
+}
+
+@media (max-width: 44em) {
+  .reviews {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 34em) {
+  .reviews {
+    grid-template-columns: 1fr;
+  }
+}

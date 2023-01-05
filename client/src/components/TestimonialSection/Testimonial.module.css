@@ -4,6 +4,14 @@
   margin-bottom: 1.2rem;
 }
 
+.ratings {
+  font-size: 1.8rem;
+}
+
+.rating_icon {
+  color: #d31e3d;
+}
+
 .testimonial_text {
   font-size: 1.8rem;
   line-height: 1.8;

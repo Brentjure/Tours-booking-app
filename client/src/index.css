@@ -6,7 +6,7 @@
 
 html {
   /* font-size: 10px; */
-  font-size: 62.5%;
+  font-size: 62.5% !important;
   overflow-x: hidden;
 
   /* Does not work on safari */
@@ -14,10 +14,10 @@ html {
 }
 
 body {
-  font-family: 'Rubik', sans-serif;
-  line-height: 1;
-  font-weight: 400;
-  color: #555;
+  font-family: 'Rubik', sans-serif !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  color: #555 !important;
 
   /* Only works if there is nothing absolutely 
     positioned in relation to body */
@@ -67,12 +67,12 @@ section {
   letter-spacing: 0.75px;
 }
 
-.btn,
-.btn:link,
-.btn:visited {
+.button,
+.button:link,
+.button:visited {
   display: inline-block;
   background-color: #0071eb;
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
   font-size: 1.6rem;
   font-weight: 200;
@@ -87,7 +87,7 @@ section {
   transition: all 0.3s;
 }
 
-.btn:hover {
+.button:hover {
   background-color: #00448d;
 }
 

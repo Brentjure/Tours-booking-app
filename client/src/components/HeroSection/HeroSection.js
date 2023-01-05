@@ -1,5 +1,5 @@
 import classes from './HeroSection.module.css';
-import heroImg from '../images/hero-3.jpg';
+import heroImg from '../../images/hero-3.jpg';
 
 const HeroSection = (props) => {
   return (

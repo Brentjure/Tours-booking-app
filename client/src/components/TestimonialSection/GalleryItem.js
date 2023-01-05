@@ -1,5 +1,5 @@
 import classes from './GalleryItem.module.css';
-import photo from '../images/tour-1-1.jpg';
+import photo from '../../images/tour-1-1.jpg';
 
 const GalleryItem = () => {
   return (

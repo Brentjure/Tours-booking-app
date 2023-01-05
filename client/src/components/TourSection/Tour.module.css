@@ -121,6 +121,11 @@
   border-bottom: 1px solid transparent;
 }
 
+.detailsBtn {
+  text-decoration: none;
+  color: #fff;
+}
+
 /* Bellow 1200px (Landscape Tablets) */
 @media (max-width: 75rem) {
 }

@@ -1,4 +1,5 @@
-import tourphoto from '../images/tour-1-1.jpg';
+import { Link } from 'react-router-dom';
+import tourphoto from '../../images/tour-1-1.jpg';
 import classes from './Tour.module.css';
 
 const Tour = () => {
@@ -69,7 +70,11 @@ const Tour = () => {
             </span>
           </li>
         </ul>
-        <button className="btn">Details</button>
+        <button className="button">
+          <Link to="/the-forest-hiker" className={classes.detailsBtn}>
+            Details
+          </Link>
+        </button>
       </div>
     </div>
   );

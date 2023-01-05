@@ -71,7 +71,7 @@
   max-width: 120rem;
   /* padding: 0 3.2rem; */
   margin: 0 auto;
-  padding: 3.2rem;
+  padding: 6.4rem 3.2rem;
 
   display: grid;
   grid-template-columns: 70fr 30fr;
@@ -89,6 +89,12 @@
   border-bottom: 1px solid #eee;
 }
 
+.overview {
+  font-size: 1.8rem;
+  padding: 3.2rem;
+  line-height: 1.6;
+}
+
 .details {
   display: flex;
   gap: 1.6rem;
@@ -96,82 +102,43 @@
   font-size: 1.4rem;
   list-style-type: none;
   margin-bottom: 2.4rem;
+  margin-top: 1.2rem;
 }
 
-.card {
-  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
-  border-radius: 11px;
-  padding: 2.4rem;
-
-  font-size: 1.6rem;
+.tour_guides {
+  padding-top: 3.2rem;
 }
-.info {
+
+.guides_details {
   display: flex;
-  justify-content: space-between;
-  list-style: none;
-  margin-bottom: 2.4rem;
+  flex-direction: column;
+  gap: 2.4rem;
 }
 
-.price {
-  font-size: 2.4rem;
-}
-
-.tour_attribute {
-  font-size: 1.6rem;
+.tour_guide {
   display: flex;
+  gap: 2.4rem;
+
   align-items: center;
-  gap: 1.2rem;
+}
+.guide_img {
+  width: 6.4rem;
+  border-radius: 50%;
+}
+.guide_role {
+  text-align: center;
+}
+.guide_name {
 }
 
-.tour_icon {
-  color: #d31e3d;
-  height: 1.6rem;
-  width: 1.6rem;
+.carousel {
+  margin: 2.4rem;
 }
-
-.dates {
-  border: solid 1px #eee;
+.review {
+  background-color: #e6f1f7;
   border-radius: 11px;
-  padding: 2.4rem;
-}
-
-.container_dates {
-  /* margin-bottom: 2.4rem; */
-  padding-bottom: 0.8rem;
-}
-.start_date {
-  display: flex;
-  justify-content: space-between;
-  /* border-right: solid 1px #eee; */
-  /* padding: 2.4rem 0; */
-}
-
-.guests {
-  padding-top: 0.8rem;
-  border-top: solid 1px #eee;
-}
-
-.btn_booking {
-  border-radius: 11px !important;
-  margin: 2.4rem 0;
-  width: 100%;
-}
-
-.fees {
-  list-style: none;
-  border-bottom: solid 1px #eee;
-}
-.fees_attribute {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.4rem 0;
-}
-.total {
-  padding-top: 2.4rem;
-  display: flex;
-  justify-content: space-between;
-
-  font-weight: 600;
+  padding: 3.2rem;
+  margin: 4.8rem 0;
 }
 
 /* BELLOW 1344px (Smaller desktops) */
@@ -203,6 +170,9 @@
 @media (max-width: 44em) {
   .hero {
     /* height: 320px; */
+  }
+  .content {
+    grid-template-columns: 1fr;
   }
 
   .hero {
