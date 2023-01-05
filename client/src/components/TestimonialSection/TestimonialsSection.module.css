@@ -25,7 +25,7 @@
 
 /* Bellow 1200px (Landscape tablets) */
 @media (max-width: 75em) {
-  .testimonials_container {
+  .testimonial_container {
     padding: 9.6rem 3.2rem;
   }
 }
