@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import SignUpTextBox from './SignUpTextBox';
-import LoginTextBox from './LoginTextBox';
+import SignUpTextBox from '../Auth/SignUpTextBox';
+import LoginTextBox from '../Auth/LoginTextBox';
 import Cta from './Cta';
 import classes from './CtaSection.module.css';
 

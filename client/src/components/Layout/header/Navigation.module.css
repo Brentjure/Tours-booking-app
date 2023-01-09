@@ -5,6 +5,29 @@
   gap: 4.8rem;
 }
 
+.nav-acc {
+  display: flex !important;
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.user-img {
+  border-radius: 50%;
+  height: 5rem;
+  width: 5rem;
+  /* align-self: center; */
+}
+
+/* .main-nav-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+  border: none;
+} */
+
 .main-nav-link:link,
 .main-nav-link:visited {
   display: inline-block;
@@ -13,6 +36,7 @@
   font-weight: 600;
   font-size: 1.8rem;
   transition: all 0.3s;
+  border: none;
 }
 .main-nav-link:hover,
 .main-nav-link:active {

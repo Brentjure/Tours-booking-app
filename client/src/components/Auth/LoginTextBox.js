@@ -6,7 +6,7 @@ const LoginTextBox = (props) => {
       <h2 className="heading-secondary">Your adventure starts here!</h2>
       <span className="subheading">Already have an Account?</span>
       <p className={classes.cta_text}>Login now to book your dream tour!</p>
-      <form className={classes.cta_form} action="">
+      <form className={classes.cta_form}>
         <div>
           <label for="email">Email</label>
           <input
@@ -33,7 +33,8 @@ const LoginTextBox = (props) => {
         </div>
       </form>
       <em className={classes.have_account}>
-        Don't have an account? <span>Sign up to Tours</span>
+        Don't have an account?{' '}
+        <span onClick={props.onToggle}>Sign up to Tours</span>
       </em>
     </div>
   );

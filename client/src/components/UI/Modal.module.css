@@ -1,0 +1,57 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 100000;
+
+  backdrop-filter: blur(10px);
+}
+
+.modal {
+  position: absolute;
+  top: 10vh;
+  left: 10%;
+  width: 80%;
+  z-index: 1000000;
+  background-color: #fff;
+  padding: 0;
+
+  animation: slide-down 300ms ease-out forwards;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 50px;
+  overflow: auto;
+}
+
+.close {
+  height: 5rem;
+  width: 5rem;
+  color: #333;
+  background-color: #e6f1f7;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+  text-align: right;
+
+  position: absolute;
+  z-index: 999999999;
+  top: 5vh;
+  right: 4%;
+}
+.close:hover {
+  color: #d31e3d;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -6,6 +6,7 @@
   /* height: 60rem; */
 
   overflow: hidden;
+  /* overflow-y: scroll; */
   background-image: linear-gradient(
     to right bottom,
     hsla(211, 85%, 87%, 0.349),

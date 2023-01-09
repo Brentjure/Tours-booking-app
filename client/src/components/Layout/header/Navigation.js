@@ -1,35 +1,39 @@
+import { Link } from 'react-router-dom';
 import classes from './Navigation.module.css';
+import userImg from '../../../images/user-14.jpg';
 // a.main-nav-link.loggedin(href='/me')
 //             img(class="nav-user-photo" src=`img/users/${user.photo}`, alt=`Photo of ${user.name}`)
 //             span=`Hi ${user.name.split(' ')[0]}.`
 
-const Navigation = () => {
+const Navigation = (props) => {
   const styles = `${classes['main-nav-link']} ${classes['nav-cta']}`;
+  const account = `${classes['main-nav-link']} ${classes['nav-acc']}`;
   return (
     <nav>
       <ul className={classes['main-nav-list']}>
         {/* if logged in */}
         <li>
-          <a className={classes['main-nav-link']} href="#pricing">
-            Log out
-          </a>
+          <Link className={classes['main-nav-link']}>Tours</Link>
         </li>
         <li>
-          <a className={classes['main-nav-link']} href="#cta">
-            <img className={classes['user-img']} src={''} alt="beach party" />
-            <span>Hi Brent</span>
-          </a>
+          <Link className={classes['main-nav-link']}>Log Out</Link>
+        </li>
+        <li>
+          <Link to="/account" className={account}>
+            <img className={classes['user-img']} src={userImg} alt="user" />
+            <span>Hi, Brent</span>
+          </Link>
         </li>
         {/* else */}
         <li>
-          <a className={classes['main-nav-link']} href="#pricing">
+          <Link className={classes['main-nav-link']} onClick={props.onShowAuth}>
             Log in
-          </a>
+          </Link>
         </li>
         <li>
-          <a className={styles} href="#cta">
+          <Link className={styles} onClick={props.onShowAuth}>
             Sign up
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

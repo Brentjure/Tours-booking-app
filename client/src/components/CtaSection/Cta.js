@@ -1,13 +1,19 @@
-import classes from './Cta.module.css';
+import { useState } from 'react';
 
-import SignUpTextBox from './SignUpTextBox';
-import LoginTextBox from './LoginTextBox';
+import classes from './Cta.module.css';
+import SignUpTextBox from '../Auth/SignUpTextBox';
+import LoginTextBox from '../Auth/LoginTextBox';
 
 const Cta = (props) => {
+  const [isLogin, setIsLoggin] = useState(false);
+  const toggle = () => {
+    setIsLoggin((prevState) => !prevState);
+  };
+
   return (
     <div className={classes.cta}>
-      <SignUpTextBox />
-      {/* <LoginTextBox /> */}
+      {!isLogin && <SignUpTextBox onToggle={toggle} />}
+      {isLogin && <LoginTextBox onToggle={toggle} />}
       <div
         className={classes.cta_img_box}
         role="img"
