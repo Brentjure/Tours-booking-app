@@ -8,9 +8,9 @@ const SignUpTextBox = (props) => {
       <p className={classes.cta_text}>
         Create an Account now to book your dream tour!
       </p>
-      <form className={classes.cta_form} action="">
+      <form className={classes.cta_form}>
         <div>
-          <label for="full-name">Full Name</label>
+          <label htmlFor="full-name">Full Name</label>
           <input
             type="text"
             id="full-name"
@@ -19,7 +19,7 @@ const SignUpTextBox = (props) => {
           />
         </div>
         <div>
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             name=""
@@ -29,7 +29,7 @@ const SignUpTextBox = (props) => {
           />
         </div>
         <div>
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name=""
@@ -39,7 +39,7 @@ const SignUpTextBox = (props) => {
           />
         </div>
         <div>
-          <label for="confirm-password">Confirm password</label>
+          <label htmlFor="confirm-password">Confirm password</label>
           <input
             type="password"
             name=""

@@ -71,7 +71,7 @@ const Tour = () => {
           </li>
         </ul>
         <button className="button">
-          <Link to="/the-forest-hiker" className={classes.detailsBtn}>
+          <Link to="/tour/the-forest-hiker" className={classes.detailsBtn}>
             Details
           </Link>
         </button>
