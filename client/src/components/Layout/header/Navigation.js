@@ -10,6 +10,20 @@ import AuthContext from '../../../store/auth-context';
 
 const Navigation = (props) => {
   const authCtx = useContext(AuthContext);
+  const user = authCtx.user.data.user;
+  console.log(user.photo);
+  const fetchImage = async () => {
+    const response = await fetch(
+      `http://127.0.0.1:8000/public/images/users/${user.photo}`
+    );
+    const imgUrl = await response.json();
+    console.log(imgUrl);
+    return imgUrl;
+  };
+  const userPhoto = `http://127.0.0.1:8000/public/images/users/${user.photo}`;
+
+  console.log(userPhoto);
+  const userP = <img src={userPhoto} alt="user" />;
 
   const styles = `${classes['main-nav-link']} ${classes['nav-cta']}`;
   const account = `${classes['main-nav-link']} ${classes['nav-acc']}`;
@@ -30,9 +44,9 @@ const Navigation = (props) => {
         </li>
         {authCtx.isLoggedIn && (
           <li>
-            <Link to="/account" className={account}>
-              <img className={classes['user-img']} src={userImg} alt="user" />
-              <span>Hi, Brent</span>
+            <Link to="/account/settings" className={account}>
+              <img className={classes['user-img']} src={userPhoto} alt="user" />
+              <span>{`Hi, ${user.name.split(' ')[0]}`}</span>
             </Link>
           </li>
         )}
