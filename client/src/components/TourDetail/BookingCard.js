@@ -1,6 +1,7 @@
 import classes from './BookingCard.module.css';
 
 const BookingCard = (props) => {
+  console.log(props);
   const btn = `button ${classes.btn_booking}`;
 
   return (
@@ -8,7 +9,7 @@ const BookingCard = (props) => {
       <ul className={classes.info}>
         <li className={classes.tour_attribute}>
           <span>
-            $ <strong className={classes.price}>47</strong> / person
+            $ <strong className={classes.price}>{props.price}</strong> / person
           </span>
         </li>
         <li className={classes.tour_attribute}>
@@ -17,7 +18,7 @@ const BookingCard = (props) => {
             name="star-outline"
           ></ion-icon>
           <span>
-            <strong> 4.9</strong> (576)
+            <strong> {props.averageRatings}</strong> ({props.ratingsQuantity})
           </span>
         </li>
       </ul>
@@ -30,14 +31,14 @@ const BookingCard = (props) => {
         </div>
         <div className={classes.guests}>Guests</div>
       </div>
-      <button className={btn}> Book now For $ 49</button>
+      <button className={btn}> Book now For $ {props.price}</button>
       <div>
         <ul className={classes.fees}>
           <li className={classes.fees_attribute}>
             <p>
-              <span>$ 49</span> x <span> 1 person</span>
+              <span>$ {props.price}</span> x <span> 1 person</span>
             </p>
-            <p>$ 49</p>
+            <p>$ {props.price}</p>
           </li>
           <li className={classes.fees_attribute}>
             <span>Service fee</span>
@@ -46,7 +47,7 @@ const BookingCard = (props) => {
         </ul>
         <div className={classes.total}>
           <span>Total</span>
-          <span>$ 49</span>
+          <span>$ {props.price}</span>
         </div>
       </div>
     </div>

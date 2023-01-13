@@ -1,5 +1,5 @@
 import { Fragment, useContext } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Account from './pages/Account';
 import Home from './pages/Home';
 import AccountSettings from './components/Account/Contents/Settings/AccountSettings';
@@ -14,8 +14,8 @@ const App = () => {
     <Fragment>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/tours" element={<Home />} />
-        <Route path="/tours/:slug" element={<TourDetails />} />
+        <Route path="/tours" element={<Navigate to="/" />} />
+        <Route path="/tours/:tourId" element={<TourDetails />} />
         {authCtx.isLoggedIn && (
           <Route path="/account/*" element={<Account />}>
             <Route path="settings" element={<AccountSettings />} />

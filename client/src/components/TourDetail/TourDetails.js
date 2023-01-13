@@ -1,20 +1,21 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
+
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 
-// import Accordion from 'react-bootstrap/Accordion';
-// import Carousel from 'react-bootstrap/Carousel';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Reviews from './Reviews';
 import BookingCard from './BookingCard';
-// import Carousel from '../UI/Carousel';
 import classes from './TourDetails.module.css';
-import tourImg from '../../images/tour-1-1.jpg';
 import userImg from '../../images/user-14.jpg';
 
 const TourDetails = (props) => {
-  const gallery = [tourImg, tourImg, tourImg];
+  console.log(props);
+  console.log({
+    price: props.tour.price,
+    averageRatings: props.tour.averageRatings,
+    ratingsQuantity: props.tour.ratingsQuantity,
+  });
+
   return (
     <Fragment>
       <section className={classes['section-hero']}>
@@ -22,14 +23,15 @@ const TourDetails = (props) => {
           <div className={classes['hero-section-img-container']}>
             <img
               className={classes['hero-img']}
-              src={tourImg}
+              src={`http://127.0.0.1:8000/images/tours/${props.tour.imageCover}`}
               alt="beach party"
             />
           </div>
           <div className={classes['hero-content']}>
             <div className={classes['content-container']}>
               <p className={classes['heading-primary']}>
-                The Forest Hiker: 7-days tour in Mombasa
+                {props.tour.name}: {props.tour.duration}-days tour in
+                {/* {tour.startLocation.description} */}
                 {/* Exploring the jaw-dropping US east coast by foot and by boat */}
               </p>
             </div>
@@ -40,7 +42,7 @@ const TourDetails = (props) => {
         <div>
           <div className={classes.overview_header}>
             <span class="heading-secondary">
-              The Forest Hiker: 7 days tour.
+              {props.tour.name}: {props.tour.duration} days tour.
             </span>
             {/* <h2 class="heading-secondary">Exciting tours for adventures people.</h2> */}
 
@@ -50,36 +52,28 @@ const TourDetails = (props) => {
                   className={classes['tour-icon']}
                   name="people-outline"
                 ></ion-icon>
-                <span> 15 people</span>
+                <span> {props.tour.maxGroupSize} people</span>
               </li>
               <li className={classes.tour_attribute}>
                 <ion-icon
                   className={classes['tour-icon']}
                   name="hourglass-outline"
                 ></ion-icon>
-                <span> 7 days</span>
+                <span> {props.tour.duration} days</span>
               </li>
               <li className={classes.tour_attribute}>
                 <ion-icon
                   className={classes['tour-icon']}
                   name="flag-outline"
                 ></ion-icon>
-                <span> 4 stops</span>
+                <span> {props.tour.locations.length} stops</span>
               </li>
             </ul>
           </div>
           <div className={classes.overview}>
             <span class="subheading">Tour Overview</span>
-            <p>Exploring the jaw-dropping US east coast by foot and by boat</p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <p>{props.tour.summary}</p>
+            <p>{props.tour.description}</p>
 
             <div className={classes.tour_guides}>
               <span class="subheading">tour guides</span>
@@ -116,7 +110,11 @@ const TourDetails = (props) => {
           </div>
         </div>
         <div>
-          <BookingCard />
+          <BookingCard
+            price={props.tour.price}
+            averageRatings={props.tour.averageRatings}
+            ratingsQuantity={props.tour.ratingsQuantity}
+          />
         </div>
       </section>
       <section>
@@ -124,9 +122,12 @@ const TourDetails = (props) => {
           <span class="heading-tertiary">Tour Gallery</span>
           <div className={classes.carousel}>
             <Carousel infiniteLoop autoPlay>
-              {gallery.map((img, index) => (
-                <div className={classes.image}>
-                  <img src={img} alt="a tour guide" />
+              {props.tour.images.map((img, index) => (
+                <div className={classes.image} key={index}>
+                  <img
+                    src={`http://127.0.0.1:8000/images/tours/${img}`}
+                    alt="a tour guide"
+                  />
                 </div>
               ))}
             </Carousel>

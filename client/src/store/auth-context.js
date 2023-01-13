@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 const AuthContext = React.createContext({
-  token: {},
+  user: {},
   isLoggedIn: false,
-  login: (token) => {},
+  login: (user) => {},
   logout: () => {},
 });
 

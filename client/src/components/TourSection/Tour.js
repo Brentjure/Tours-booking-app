@@ -1,33 +1,33 @@
 import { Link } from 'react-router-dom';
-import tourphoto from '../../images/tour-1-1.jpg';
 import classes from './Tour.module.css';
 
-const Tour = () => {
+const Tour = (props) => {
+  console.log(props.details);
   return (
     <div className={classes.tour}>
       <div className={classes['tour-header']}>
         <img
           className={classes['tour-img']}
-          src={tourphoto}
+          src={`http://127.0.0.1:8000/images/tours/${props.details.imageCover}`}
           alt="an elephant"
         />
         <div className={classes['tour-heading']}>
-          <p className={classes['tour-title']}>The Sea Explorer</p>
+          <p className={classes['tour-title']}>{props.details.name}</p>
         </div>
       </div>
       <div className={classes['tour-details']}>
         <div className={classes['tour-content']}>
-          <span className={classes['tour-detail']}>medium 7-day tour</span>
-          <p className={classes['tour-summary']}>
-            Exploring the jaw-dropping US east coast by foot and by boat
-          </p>
+          <span className={classes['tour-detail']}>
+            {props.details.difficulty} {props.details.duration}-day tour
+          </span>
+          <p className={classes['tour-summary']}>{props.details.summary}</p>
           <ul className={classes['tour-attributes']}>
             <li className={classes['tour-attribute']}>
               <ion-icon
                 className={classes['tour-icon']}
                 name="location-outline"
               ></ion-icon>
-              <span> Miami, USA</span>
+              <span> {props.details.startLocation.description}</span>
             </li>
             <li class={classes['tour-attribute']}>
               <ion-icon
@@ -41,14 +41,14 @@ const Tour = () => {
                 className={classes['tour-icon']}
                 name="flag-outline"
               ></ion-icon>
-              <span> 4 stops</span>
+              <span> {props.details.locations.length} stops</span>
             </li>
             <li className={classes['tour-attribute']}>
               <ion-icon
                 className={classes['tour-icon']}
                 name="people-outline"
               ></ion-icon>
-              <span> 15 people</span>
+              <span> {props.details.maxGroupSize} people</span>
             </li>
           </ul>
         </div>
@@ -61,17 +61,21 @@ const Tour = () => {
               name="star-outline"
             ></ion-icon>
             <span>
-              <strong> 4.9</strong> rating (576)
+              <strong> {props.details.averageRatings}</strong> rating (
+              {props.details.ratingsQuantity})
             </span>
           </li>
           <li>
             <span>
-              $<strong>47</strong> per person
+              $<strong>{props.details.price}</strong> per person
             </span>
           </li>
         </ul>
         <button className="button">
-          <Link to="/tour/the-forest-hiker" className={classes.detailsBtn}>
+          <Link
+            to={`/tours/${props.details._id}`}
+            className={classes.detailsBtn}
+          >
             Details
           </Link>
         </button>
