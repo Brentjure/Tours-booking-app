@@ -1,5 +1,12 @@
+import { Fragment } from 'react';
+import AddTourForm from './AddTourForm';
+
 const TourSettings = (props) => {
-  return <h1>Tour Settings</h1>;
+  return (
+    <Fragment>
+      <AddTourForm />
+    </Fragment>
+  );
 };
 
 export default TourSettings;

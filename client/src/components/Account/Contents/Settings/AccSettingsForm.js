@@ -6,11 +6,11 @@ const AccountsSettingsForm = (props) => {
   return (
     <form className={classes.form} action="">
       <div>
-        <label for="name">Name</label>
+        <label htmlFor="name">Name</label>
         <input type="text" id="name" placeholder="Brent Otieno" />
       </div>
       <div>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="email" id="email" placeholder="me@exmple.com" />
       </div>
       <div className={classes.photo_upload}>
@@ -22,7 +22,7 @@ const AccountsSettingsForm = (props) => {
           id="photo"
           name="photo"
         />
-        <label for="photo">Choose new photo</label>
+        <label htmlFor="photo">Choose new photo</label>
       </div>
       <div className={classes.btn_form}>
         <button className={btn}>Save settings</button>

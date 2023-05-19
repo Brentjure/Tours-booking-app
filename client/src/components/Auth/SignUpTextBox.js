@@ -53,7 +53,9 @@ const SignUpTextBox = (props) => {
       </form>
       <em className={classes.have_account}>
         Already have an account?{' '}
-        <span onClick={props.onToggle}>Login to Tours</span>
+        <span className="toggle" onClick={props.onToggle}>
+          Login to Tours
+        </span>
       </em>
     </div>
   );

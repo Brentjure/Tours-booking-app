@@ -1,8 +1,12 @@
 import { useState, useRef, useContext } from 'react';
+
+import useHttps from '../../hooks/use-https';
 import AuthContext from '../../store/auth-context';
+import { login } from '../../lib/api';
 import classes from './LoginTextBox.module.css';
 
 const LoginTextBox = (props) => {
+  // const { data, error, status, sendRequest } = useHttps(login, false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const emailInputRef = useRef();
@@ -15,6 +19,11 @@ const LoginTextBox = (props) => {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
+
+    // const requestData = { email: enteredEmail, password: enteredPassword };
+
+    // sendRequest(requestData);
+    // authCtx.login(data);
 
     setIsLoading(true);
 
@@ -36,6 +45,7 @@ const LoginTextBox = (props) => {
         const data = await response.json();
         console.log(JSON.stringify(data));
         authCtx.login(data);
+        props.onClose();
       } else {
         const data = await response.json();
 
@@ -85,10 +95,12 @@ const LoginTextBox = (props) => {
           <p>Forgot your password?</p>
         </div>
       </form>
-      {error && <p>{error.message}</p>}
+      {error && <p className={classes.error}>{error.message}</p>}
       <em className={classes.have_account}>
         Don't have an account?{' '}
-        <span onClick={props.onToggle}>Sign up to Tours</span>
+        <span className="toggle" onClick={props.onToggle}>
+          Sign up to Tours
+        </span>
       </em>
     </div>
   );

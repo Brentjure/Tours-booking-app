@@ -32,8 +32,8 @@ const Cta = (props) => {
 
   return (
     <div className={classes.cta}>
-      {!isLogin && <SignUpTextBox onToggle={toggle} />}
-      {isLogin && <LoginTextBox onToggle={toggle} />}
+      {!isLogin && <SignUpTextBox onClose={props.onClose} onToggle={toggle} />}
+      {isLogin && <LoginTextBox onClose={props.onClose} onToggle={toggle} />}
       <div
         className={classes.cta_img_box}
         role="img"

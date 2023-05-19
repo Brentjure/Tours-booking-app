@@ -98,6 +98,11 @@ section {
   margin: 0 auto;
 }
 
+.toggle {
+  cursor: pointer;
+  color: #d31e3d;
+}
+
 @media (max-width: 75em) {
   html {
     /* 9px / 16px */

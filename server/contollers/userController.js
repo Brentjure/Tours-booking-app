@@ -1,9 +1,16 @@
 const multer = require('multer');
 const sharp = require('sharp');
 
+const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../Models/userModel');
 const AppError = require('../utils/appError');
+
+exports.createUser = factory.createOne(User);
+exports.getAllUsers = factory.getAll(User);
+exports.getUser = factory.getOne(User);
+exports.updateUser = factory.updateOne(User);
+exports.deleteUser = factory.deleteOne(User);
 
 const filteredObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -44,57 +51,6 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
     .toFile(`public/images/users/${req.file.filename}`);
 
   next();
-});
-
-exports.getAllUsers = catchAsync(async (req, res) => {
-  const users = await User.find();
-
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-});
-
-exports.getUser = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
-
-  if (!user) return next(new AppError('There is no user with that id', 404));
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      user,
-    },
-  });
-});
-
-exports.updateUser = catchAsync(async (req, res, next) => {
-  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  if (!updatedUser)
-    return next(new AppError('No user found with that ID', 404));
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      user: updatedUser,
-    },
-  });
-});
-exports.deleteUser = catchAsync(async (req, res, next) => {
-  const user = await User.findByIdAndDelete(req.params.id);
-
-  if (!user) return next(new AppError('No user found with that ID', 404));
-
-  res.status(200).json({
-    status: 'success',
-    data: null,
-  });
 });
 
 exports.getMe = (req, res, next) => {

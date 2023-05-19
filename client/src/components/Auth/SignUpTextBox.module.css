@@ -16,7 +16,7 @@
 .have_account {
   font-size: 1.8rem;
   line-height: 1.8;
-  margin-top: 3.2rem;
+  margin-top: 4.8rem;
 }
 
 .cta_img_box {
@@ -36,6 +36,7 @@
   column-gap: 3.2rem;
   row-gap: 2.4rem;
   font-family: inherit;
+  margin-bottom: 2.4rem;
 }
 
 .cta_form label {

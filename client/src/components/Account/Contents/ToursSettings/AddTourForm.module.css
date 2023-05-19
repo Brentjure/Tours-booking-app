@@ -1,0 +1,71 @@
+.form {
+  display: block;
+  font-family: inherit;
+  margin-bottom: 2.4rem;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2.4rem;
+
+  font-family: inherit;
+  margin-bottom: 2.4rem;
+}
+
+.toggleLocation {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.6rem;
+  /* font-weight: 600; */
+  background-color: #0071eb;
+  color: #fffcfb;
+  border-radius: 5px;
+  margin: 3rem;
+  width: 50%;
+}
+
+.addTourIcon {
+  height: 3rem;
+  width: 3rem;
+}
+
+.locations {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2.4rem;
+}
+
+.form label,
+.details label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+
+.form textarea,
+.form input,
+.form select,
+.details input,
+.details select {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.8rem;
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  background-color: #fffcfb;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.details input::placeholder {
+  color: #aaa;
+}
+
+.cta *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.8rem #fdf2e980;
+}

@@ -5,10 +5,10 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a lo
 
 import Reviews from './Reviews';
 import BookingCard from './BookingCard';
-import classes from './TourDetails.module.css';
+import classes from './Tour.module.css';
 import userImg from '../../images/user-14.jpg';
 
-const TourDetails = (props) => {
+const Tour = (props) => {
   console.log(props);
   console.log({
     price: props.tour.price,
@@ -30,7 +30,8 @@ const TourDetails = (props) => {
           <div className={classes['hero-content']}>
             <div className={classes['content-container']}>
               <p className={classes['heading-primary']}>
-                {props.tour.name}: {props.tour.duration}-days tour in
+                {props.tour.name}: {props.tour.duration}-days tour,
+                {props.tour.startLocation.description}
                 {/* {tour.startLocation.description} */}
                 {/* Exploring the jaw-dropping US east coast by foot and by boat */}
               </p>
@@ -78,33 +79,17 @@ const TourDetails = (props) => {
             <div className={classes.tour_guides}>
               <span class="subheading">tour guides</span>
               <div className={classes.guides_details}>
-                <figure className={classes.tour_guide}>
-                  <img
-                    className={classes.guide_img}
-                    src={userImg}
-                    alt="img of a tour a tour guide"
-                  />
-                  <span className={classes.guide_role}>Lead guide</span>
-                  <p className={classes.guide_name}>Steve T Scaife</p>
-                </figure>
-                <figure className={classes.tour_guide}>
-                  <img
-                    className={classes.guide_img}
-                    src={userImg}
-                    alt="img of a tour a tour guide"
-                  />
-                  <span className={classes.guide_role}>Lead guide</span>
-                  <p className={classes.guide_name}>Steve T Scaife</p>
-                </figure>
-                <figure className={classes.tour_guide}>
-                  <img
-                    className={classes.guide_img}
-                    src={userImg}
-                    alt="img of a tour a tour guide"
-                  />
-                  <span className={classes.guide_role}>Lead guide</span>
-                  <p className={classes.guide_name}>Steve T Scaife</p>
-                </figure>
+                {props.tour.guides.map((el, index) => (
+                  <figure className={classes.tour_guide}>
+                    <img
+                      className={classes.guide_img}
+                      src={`http://127.0.0.1:8000/images/users/${el.photo}`}
+                      alt="img of a tour a tour guide"
+                    />
+                    <span className={classes.guide_role}>{el.role}</span>
+                    <p className={classes.guide_name}>{el.name}</p>
+                  </figure>
+                ))}
               </div>
             </div>
           </div>
@@ -143,4 +128,4 @@ const TourDetails = (props) => {
   );
 };
 
-export default TourDetails;
+export default Tour;
