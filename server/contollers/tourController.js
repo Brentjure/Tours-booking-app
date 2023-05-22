@@ -1,5 +1,6 @@
 const multer = require('multer');
 const sharp = require('sharp');
+const { v4: uuidv4 } = require('uuid');
 
 const Tour = require('../Models/tourModel');
 const factory = require('./handlerFactory');
@@ -36,7 +37,8 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
   if (!req.files.imageCover || !req.files.images) return next();
 
   // 1) Cover image
-  req.body.imageCover = `tour-${req.params.id}-${Date.now()}-cover.jpeg`;
+
+  req.body.imageCover = `tour-${uuidv4()}-${Date.now()}-cover.jpeg`;
   await sharp(req.files.imageCover[0].buffer)
     .resize(2000, 1333)
     .toFormat('jpeg')
@@ -48,7 +50,8 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
 
   await Promise.all(
     req.files.images.map(async (file, i) => {
-      const filename = `tour-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
+      const filename = `tour-${uuidv4()}-${Date.now()}-${i + 1}.jpeg`;
+      console.log(filename);
 
       await sharp(file.buffer)
         .resize(2000, 1333)

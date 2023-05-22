@@ -9,7 +9,11 @@ router.use('/:tourId/reviews', reviewRouter);
 router
   .route('/')
   .get(tourController.getAllTours)
-  .post(tourController.createTour);
+  .post(
+    tourController.uploadTourImages,
+    tourController.resizeTourImages,
+    tourController.createTour
+  );
 
 router
   .route('/:id')
