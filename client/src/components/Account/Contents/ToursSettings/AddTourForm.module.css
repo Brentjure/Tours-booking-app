@@ -5,12 +5,13 @@
 }
 
 .details {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
   gap: 2.4rem;
 
-  font-family: inherit;
-  margin-bottom: 2.4rem;
+  margin-bottom: 3.2rem;
+  /* padding-bottom: 2.4 rem; */
 }
 
 .toggleLocation {
@@ -23,7 +24,7 @@
   color: #fffcfb;
   border-radius: 5px;
   margin: 3rem;
-  width: 50%;
+  max-width: 50%;
 }
 
 .addTourIcon {

@@ -81,14 +81,15 @@ export const getAllUsers = async (requestData) => {
 export const addTour = async (requestData) => {
   const response = await fetch(`${api_DOMAIN}/tours`, {
     method: 'POST',
-    body: JSON.stringify(requestData.enteredTour),
+    body: requestData.form,
     headers: {
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${requestData.token} `,
     },
   });
 
   const data = await response.json();
+  console.log(data);
 
   if (!response.ok) {
     let errorMessage = 'Could not create tour!';

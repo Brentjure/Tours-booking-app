@@ -3,10 +3,8 @@ import { IoAddOutline } from 'react-icons/io5';
 
 import classes from './AddTourForm.module.css';
 import { getAllUsers, addTour } from '../../../../lib/api';
+import { createFormData } from '../../../../lib/createFormData';
 import AuthContext from '../../../../store/auth-context';
-
-let leadGuides;
-let guides;
 
 const AddTourForm = (props) => {
   const [locations, setLocations] = useState([
@@ -17,30 +15,13 @@ const AddTourForm = (props) => {
       long: '',
     },
   ]);
-
+  const [enteredImageCover, setEnteredImageCover] = useState();
+  const [enteredImage1, setEnteredImage1] = useState();
+  const [enteredImage2, setEnteredImage2] = useState();
+  const [enteredImage3, setEnteredImage3] = useState();
   const [startDates, setStartDates] = useState(['']);
 
   const token = useContext(AuthContext).user.token;
-  const fetchLeadGuides = async () => {
-    try {
-      const users = getAllUsers({
-        params: '?role=lead-guide',
-        token: token,
-      }).then((results) => {
-        return results;
-      });
-      return users;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  leadGuides = fetchLeadGuides();
-  guides = getAllUsers({ params: '?role=guide', token: token });
-  // guides.then((result) => result);
-
-  console.log({ leadGuides, guides });
-  console.log(leadGuides);
 
   const nameInputRef = useRef();
   const durationInputRef = useRef();
@@ -122,12 +103,19 @@ const AddTourForm = (props) => {
       priceDiscount: priceDiscountInputRef.current.value,
       summary: summaryInputRef.current.value,
       description: descriptionInputRef.current.value,
-      startDates: startDates,
-      locations: enteredLocations,
     };
-    console.log(enteredTour);
 
-    addTour({ enteredTour, token });
+    const images = [enteredImage1, enteredImage2, enteredImage3];
+
+    const form = createFormData(
+      enteredTour,
+      enteredLocations,
+      startDates,
+      enteredImageCover,
+      images
+    );
+
+    addTour({ form, token });
   };
 
   const tourLocations = locations.map((input, index) => (
@@ -234,8 +222,54 @@ const AddTourForm = (props) => {
             ref={priceDiscountInputRef}
           />
         </div>
+        <div>
+          <label for="imageCover">Cover Image:</label>
+          <input
+            type="file"
+            id="imageCover"
+            placeholder="cover photo"
+            // value={enteredImageCover}
+            onChange={(e) => {
+              setEnteredImageCover(e.target.files[0]);
+              console.log('image cover', e.target.files[0]);
+            }}
+          />
+        </div>
+        <div>
+          <label for="image1">Image:</label>
+          <input
+            type="file"
+            id="image1"
+            placeholder=""
+            onChange={(e) => {
+              setEnteredImage1(e.target.files[0]);
+            }}
+          />
+        </div>
+        <div>
+          <label for="image2">Image:</label>
+          <input
+            type="file"
+            id="image2"
+            placeholder=""
+            onChange={(e) => {
+              setEnteredImage2(e.target.files[0]);
+            }}
+          />
+        </div>
+        <div>
+          <label for="image3">Image:</label>
+          <input
+            type="file"
+            id="image3"
+            placeholder=""
+            onChange={(e) => {
+              setEnteredImage3(e.target.files[0]);
+            }}
+          />
+        </div>
       </div>
-      <p className="heading-tertiary">Start Location(s):</p>
+      <p className="heading-tertiary">Start Location:</p>
       <div className={classes.locations}>
         <input
           type="text"
