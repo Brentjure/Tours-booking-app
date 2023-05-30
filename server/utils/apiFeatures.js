@@ -7,7 +7,7 @@ class ApiFeatures {
   filter() {
     // eslint-disable-next-line node/no-unsupported-features/es-syntax
     const queryObj = { ...this.queryStr };
-    const excludedFields = ['sort', 'fields', 'page', 'limit'];
+    const excludedFields = ['sort', 'search', 'fields', 'page', 'limit'];
     excludedFields.forEach((el) => delete queryObj[el]);
 
     let queryString = JSON.stringify(queryObj);
@@ -17,7 +17,20 @@ class ApiFeatures {
     );
 
     this.query = this.query.find(JSON.parse(queryString));
+    console.log(JSON.parse(queryString));
 
+    return this;
+  }
+
+  search() {
+    if (this.queryStr.search) {
+      const { search } = this.queryStr;
+      console.log(search);
+
+      this.query = this.query.find({
+        $text: { $search: search },
+      });
+    }
     return this;
   }
 
