@@ -6,7 +6,7 @@ import TourSection from '../components/TourSection/TourSection';
 import TestimonialsSection from '../components/TestimonialSection/TestimonialsSection';
 import CtaSection from '../components/CtaSection/CtaSection';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
-import { getAll } from '../lib/api';
+import { getAllTours } from '../lib/api';
 
 const HomePage = () => {
   const { tours } = useLoaderData();
@@ -36,6 +36,6 @@ export default HomePage;
 
 export const loader = ({ request, params }) => {
   return defer({
-    tours: getAll(),
+    tours: getAllTours(),
   });
 };

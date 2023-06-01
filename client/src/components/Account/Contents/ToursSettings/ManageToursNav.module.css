@@ -1,0 +1,26 @@
+.header {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.list a {
+  background-color: #0071eb;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.list a:hover,
+.list a:active,
+.list a.active {
+  background-color: #d31e3d;
+}

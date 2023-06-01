@@ -17,7 +17,7 @@ export const menuData = [
   {
     title: 'Manage Tours',
     icon: 'settings',
-    link: 'manage-tours',
+    link: 'manage-tours/all-tours',
   },
   {
     title: 'Manage Bookings',

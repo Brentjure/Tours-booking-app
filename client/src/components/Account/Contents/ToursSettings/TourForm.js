@@ -1,12 +1,12 @@
 import { useState, useRef, useContext } from 'react';
 import { IoAddOutline } from 'react-icons/io5';
 
-import classes from './AddTourForm.module.css';
-import { getAllUsers, addTour } from '../../../../lib/api';
+import classes from './TourForm.module.css';
+import { getAllUsers, addTour, updateTour } from '../../../../lib/api';
 import { createFormData } from '../../../../lib/createFormData';
 import AuthContext from '../../../../store/auth-context';
 
-const AddTourForm = (props) => {
+const TourForm = ({ tour }) => {
   const [locations, setLocations] = useState([
     {
       address: '',
@@ -115,59 +115,90 @@ const AddTourForm = (props) => {
       images
     );
 
-    addTour({ form, token });
+    const tourId = tour.id;
+
+    if (tour) {
+      updateTour({ form, token, tourId });
+    } else addTour({ form, token });
   };
 
-  const tourLocations = locations.map((input, index) => (
+  const tourStops = tour ? tour.locations : locations;
+
+  const tourLocations = tourStops.map((input, index) => (
     <div key={index} className={classes.locations}>
       <input
         name="address"
         placeholder="address"
         value={input.address}
+        defaultValue={tour ? `${input.address}` : ''}
         onChange={(event) => InputChangeHandler(index, event)}
       />
       <input
         name="description"
         placeholder="description"
         value={input.description}
+        defaultValue={tour ? `${input.description}` : ''}
         onChange={(event) => InputChangeHandler(index, event)}
       />
       <input
         name="lat"
         placeholder="lat"
         value={input.lat}
+        defaultValue={tour ? `${input.coordinates[1]}` : ''}
         onChange={(event) => InputChangeHandler(index, event)}
       />
       <input
         name="long"
         placeholder="long"
         value={input.long}
+        defaultValue={tour ? `${input.coordinates[0]}` : ''}
         onChange={(event) => InputChangeHandler(index, event)}
       />
       <button onClick={() => removeLocation(index)}>Remove.</button>
     </div>
   ));
 
-  const dates = startDates.map((input, index) => (
-    <div>
-      <label for="start-date">Start Date</label>
-      <input
-        type="date"
-        id="start-date"
-        placeholder=""
-        value={input}
-        onChange={(event) => startDatesInputChangeHandler(index, event)}
-      />
-      <button onClick={() => removeStartDate(index)}>Remove.</button>
-    </div>
-  ));
+  const startDate = tour ? tour.startDates : startDates;
+  console.log(startDate);
+
+  const dates = startDate.map((input, index) => {
+    console.log(input);
+    const date = new Date(input);
+    const getYear = date.toLocaleString('default', { year: 'numeric' });
+    const getMonth = date.toLocaleString('default', { month: '2-digit' });
+    const getDay = date.toLocaleString('default', { day: '2-digit' });
+    const dateFormat = getYear + '-' + getMonth + '-' + getDay;
+    console.log(dateFormat);
+
+    return (
+      <div key={index}>
+        <label htmlFor="start-date">Start Date</label>
+        <input
+          type="date"
+          id="start-date"
+          placeholder=""
+          value={input}
+          defaultValue={tour ? `${dateFormat}` : ''}
+          onChange={(event) => startDatesInputChangeHandler(index, event)}
+        />
+        <button onClick={() => removeStartDate(index)}>Remove.</button>
+      </div>
+    );
+  });
 
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
       <div className={classes.details}>
         <div>
-          <label for="name">Name</label>
-          <input ref={nameInputRef} type="text" id="name" placeholder="name" />
+          <label htmlFor="name">Name</label>
+          <input
+            ref={nameInputRef}
+            type="text"
+            id="name"
+            placeholder="name"
+            // placeholder={tour ? `${tour.name}` : 'name'}
+            defaultValue={tour ? `${tour.name}` : ''}
+          />
         </div>
         <div>{dates}</div>
         <span className={classes.toggleLocation} onClick={addstartDate}>
@@ -175,25 +206,30 @@ const AddTourForm = (props) => {
           Add start date...
         </span>
         <div>
-          <label for="difficut">Duration</label>
+          <label htmlFor="difficut">Duration</label>
           <input
             type="number"
             id="duration"
             placeholder="duration"
+            defaultValue={tour ? `${tour.duration}` : ''}
             ref={durationInputRef}
           />
         </div>
 
         <div>
-          <label for="difficulty">Difficulty</label>
-          <select id="difficulty" ref={difficultyInputRef}>
+          <label htmlFor="difficulty">Difficulty</label>
+          <select
+            id="difficulty"
+            ref={difficultyInputRef}
+            defaultValue={tour ? `${tour.difficulty}` : ''}
+          >
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="difficult">Difficult</option>
           </select>
         </div>
         <div>
-          <label for="guides">Tour Guides</label>
+          <label htmlFor="guides">Tour Guides</label>
           <select name="guides" id="guides" multiple ref={guidesInputRef}>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -201,33 +237,42 @@ const AddTourForm = (props) => {
           </select>
         </div>
         <div>
-          <label for="group-size">Group Size</label>
+          <label htmlFor="group-size">Group Size</label>
           <input
             type="number"
             id="group-size"
-            placeholder="Size"
+            placeholder="Maximum group Size"
+            defaultValue={tour ? `${tour.maxGroupSize}` : ''}
             ref={groupSizeInputRef}
           />
         </div>
         <div>
-          <label for="price">Price</label>
-          <input type="number" id="price" placeholder="" ref={priceInputRef} />
+          <label htmlFor="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            placeholder="price"
+            defaultValue={tour ? `${tour.price}` : ''}
+            ref={priceInputRef}
+          />
         </div>
         <div>
-          <label for="price-discount">Price Discount</label>
+          <label htmlFor="price-discount">Price Discount</label>
           <input
             type="number"
             id="price-discount"
-            placeholder=""
+            placeholder="Price Discount"
+            defaultValue={tour ? `${tour.priceDiscount}` : ''}
             ref={priceDiscountInputRef}
           />
         </div>
         <div>
-          <label for="imageCover">Cover Image:</label>
+          <label htmlFor="imageCover">Cover Image:</label>
           <input
             type="file"
             id="imageCover"
             placeholder="cover photo"
+            // defaultValue={tour ? `${tour.imageCover}` : ''}
             // value={enteredImageCover}
             onChange={(e) => {
               setEnteredImageCover(e.target.files[0]);
@@ -236,7 +281,7 @@ const AddTourForm = (props) => {
           />
         </div>
         <div>
-          <label for="image1">Image:</label>
+          <label htmlFor="image1">Image:</label>
           <input
             type="file"
             id="image1"
@@ -247,7 +292,7 @@ const AddTourForm = (props) => {
           />
         </div>
         <div>
-          <label for="image2">Image:</label>
+          <label htmlFor="image2">Image:</label>
           <input
             type="file"
             id="image2"
@@ -258,7 +303,7 @@ const AddTourForm = (props) => {
           />
         </div>
         <div>
-          <label for="image3">Image:</label>
+          <label htmlFor="image3">Image:</label>
           <input
             type="file"
             id="image3"
@@ -275,12 +320,14 @@ const AddTourForm = (props) => {
           type="text"
           id="address"
           placeholder="adress"
+          defaultValue={tour ? `${tour.startLocation.address}` : ''}
           ref={startLocationAddressInputRef}
         />
         <input
           type="text"
           id="description"
           placeholder="description"
+          defaultValue={tour ? `${tour.startLocation.description}` : ''}
           ref={startLocationDescriptionInputRef}
         />
         <input
@@ -288,12 +335,14 @@ const AddTourForm = (props) => {
           id="latitude"
           placeholder="latitude"
           ref={startLocationLatInputRef}
+          defaultValue={tour ? `${tour.startLocation.coordinates[1]}` : ''}
         />
         <input
           type="number"
           id="longitude"
           placeholder="Longitude"
           ref={startLocationLongInputRef}
+          defaultValue={tour ? `${tour.startLocation.coordinates[0]}` : ''}
         />
       </div>
 
@@ -304,12 +353,22 @@ const AddTourForm = (props) => {
         Add Location...
       </span>
       <div>
-        <label for="summary">Summary</label>
-        <textarea id="text" rows="5" ref={summaryInputRef}></textarea>
+        <label htmlFor="summary">Summary</label>
+        <textarea
+          id="text"
+          rows="5"
+          ref={summaryInputRef}
+          defaultValue={tour ? `${tour.summary}` : ''}
+        ></textarea>
       </div>
       <div>
-        <label for="description">Description</label>
-        <textarea id="text" rows="5" ref={descriptionInputRef}></textarea>
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="text"
+          rows="5"
+          ref={descriptionInputRef}
+          defaultValue={tour ? `${tour.description}` : ''}
+        ></textarea>
       </div>
       <div className={classes.btn_form}>
         <button className={'btn'} type="submit" onClick={submitFormHandler}>
@@ -320,4 +379,4 @@ const AddTourForm = (props) => {
   );
 };
 
-export default AddTourForm;
+export default TourForm;

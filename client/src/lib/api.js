@@ -5,10 +5,9 @@ import AuthContext from '../store/auth-context';
 
 const api_DOMAIN = `http://127.0.0.1:8000/api/v1`;
 
-export const getAll = async () => {
+export const getAllTours = async () => {
   const response = await fetch(`${api_DOMAIN}/tours`);
   const data = await response.json();
-  console.log(data);
 
   if (!response.ok) {
     const data = await response.json();
@@ -17,8 +16,6 @@ export const getAll = async () => {
 
     throw new Error(errorMessage);
   }
-
-  console.log(data);
 
   return data.data.data;
 };
@@ -86,6 +83,56 @@ export const addTour = async (requestData) => {
       // 'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${requestData.token} `,
     },
+  });
+
+  const data = await response.json();
+  console.log(data);
+
+  if (!response.ok) {
+    let errorMessage = 'Could not create tour!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  return data;
+};
+
+export const updateTour = async (requestData) => {
+  const response = await fetch(`${api_DOMAIN}/tours/${requestData.tourId}`, {
+    method: 'PATCH',
+    body: requestData.form,
+    headers: {
+      // 'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${requestData.token} `,
+    },
+  });
+
+  const data = await response.json();
+  console.log(data);
+
+  if (!response.ok) {
+    let errorMessage = 'Could not create tour!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  return data;
+};
+
+export const updateMe = async (userData, type) => {
+  const url =
+    type === 'password'
+      ? `${api_DOMAIN}/users/updateMyPassword`
+      : `${api_DOMAIN}/tours/updateMe`;
+
+  const response = await fetch(url, {
+    method: 'PATCH',
+    data: userData,
+    // headers: {
+    //   Authorization: `Bearer ${requestData.token} `,
+    // },
   });
 
   const data = await response.json();

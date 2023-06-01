@@ -43,7 +43,8 @@ export const createFormData = (
     form.append(`images`, el);
   });
 
-  //   for (const pair of form.entries()) {
-  //     console.log(pair[0] + ': ' + pair[1]);
+  for (const pair of form.entries()) {
+    console.log(pair[0] + ': ' + pair[1]);
+  }
   return form;
 };

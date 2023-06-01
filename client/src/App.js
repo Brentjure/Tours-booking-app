@@ -7,7 +7,13 @@ import {
 import Account from './pages/Account';
 import Home, { loader as toursLoader } from './pages/Home';
 import AccountSettings from './components/Account/Contents/Settings/AccountSettings';
-import TourSettings from './components/Account/Contents/ToursSettings/TourSettings';
+import TourSettings from './components/Account/Contents/ToursSettings/NewTour';
+import ManageToursRoot from './pages/ManageToursRoot';
+import AllTours from './components/Account/Contents/ToursSettings/AllTours';
+import NewTour from './components/Account/Contents/ToursSettings/NewTour';
+import EditTour, {
+  loader as tourLoader,
+} from './components/Account/Contents/ToursSettings/EditTour';
 import TourDetail, { loader as tourDetailLoader } from './pages/TourDetail';
 import AuthContext from './store/auth-context';
 import RootLayout from './pages/RootLayout';
@@ -19,6 +25,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <Home />, loader: toursLoader },
+      { path: '/', loader: toursLoader, children: [] },
       {
         path: 'tours',
         // element: <Navigate to="/" />,
@@ -38,8 +45,29 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AccountSettings /> },
           { path: 'settings', element: <AccountSettings /> },
-          { path: 'manage-tours', element: <TourSettings /> },
-          // { index: true, element: <AccountSettings /> }
+          {
+            path: 'manage-tours',
+            element: <ManageToursRoot />,
+
+            children: [
+              {
+                index: true,
+                element: <AllTours />,
+              },
+              {
+                path: 'all-tours',
+                element: <AllTours />,
+                // children: [{ path: ':Id', element: <EditTour /> }],
+              },
+
+              { path: 'new-tour', element: <NewTour /> },
+              {
+                path: ':Id',
+                element: <EditTour />,
+                loader: tourLoader,
+              },
+            ],
+          },
         ],
       },
     ],
