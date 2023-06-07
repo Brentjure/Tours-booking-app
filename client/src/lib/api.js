@@ -121,18 +121,20 @@ export const updateTour = async (requestData) => {
   return data;
 };
 
-export const updateMe = async (userData, type) => {
+export const updateMe = async (userData, token, type) => {
+  console.log(userData);
   const url =
     type === 'password'
-      ? `${api_DOMAIN}/users/updateMyPassword`
-      : `${api_DOMAIN}/tours/updateMe`;
+      ? `${api_DOMAIN}/users/updatePassword`
+      : `${api_DOMAIN}/users/updateMe`;
 
   const response = await fetch(url, {
     method: 'PATCH',
-    data: userData,
-    // headers: {
-    //   Authorization: `Bearer ${requestData.token} `,
-    // },
+    body: userData,
+    headers: {
+      Authorization: `Bearer ${token} `,
+      // 'Content-Type': 'multipart/form-data',
+    },
   });
 
   const data = await response.json();

@@ -5,6 +5,7 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   login: (user) => {},
   logout: () => {},
+  editUser: () => {},
 });
 
 export const AuthContextProvider = (props) => {
@@ -23,11 +24,17 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem('user');
   };
 
+  const editUserHandler = (user) => {
+    setUser(user);
+    localStorage.setItem('user', JSON.stringify(user));
+  };
+
   const contextValue = {
     user,
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
+    editUser: editUserHandler,
   };
 
   return (
