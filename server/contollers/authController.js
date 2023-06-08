@@ -173,9 +173,11 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const user = await User.findById(req.user.id).select('+password');
+  console.log(req.body.currentPassword, user.password);
 
-  if (!(await user.passwordIsCorrect(req.body.password, user.password)))
+  if (!(await user.passwordIsCorrect(req.body.currentPassword, user.password)))
     return next('Current password is wrong', 401);
 
   user.password = req.body.password;

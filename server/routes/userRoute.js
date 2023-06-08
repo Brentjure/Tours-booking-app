@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../contollers/userController');
 const authController = require('../contollers/authController');
+const bookingsRouter = require('./bookingRoutes');
 
 const router = express.Router();
 
@@ -12,6 +13,8 @@ router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
 router.use(authController.protect);
+
+router.use('/:Id/myBookings', bookingsRouter);
 
 router.patch('/updatePassword', authController.updatePassword);
 router.get('/me', userController.getMe, userController.getUser);

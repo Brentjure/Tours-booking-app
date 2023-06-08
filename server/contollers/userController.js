@@ -15,7 +15,7 @@ exports.deleteUser = factory.deleteOne(User);
 const filteredObj = (obj, ...allowedFields) => {
   const newObj = {};
   Object.keys(obj).forEach((el) => {
-    if (allowedFields.include(el)) newObj[el] = obj[el];
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
   });
 
   return newObj;
@@ -67,7 +67,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
   const filteredBody = filteredObj(req.body, 'name', 'email');
   if (req.file) filteredBody.photo = req.file.filename;
-  console.log(filteredBody);
 
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,

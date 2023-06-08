@@ -2,7 +2,7 @@ const express = require('express');
 const bookingController = require('../contollers/bookingController');
 const authController = require('../contollers/authController');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.use(authController.protect);
 
