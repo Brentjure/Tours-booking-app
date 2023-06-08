@@ -1,0 +1,26 @@
+.table {
+  font-size: 1.8rem;
+  width: 100%;
+  margin: 1rem, 0;
+  /* border-spacing: 5rem; */
+}
+
+.rows {
+  margin-bottom: 2rem;
+}
+
+.headings {
+  width: 2.5rem;
+  text-align: left;
+}
+.name {
+  display: flex;
+  align-items: center;
+}
+
+.photo {
+  height: 6.5rem;
+  width: 6.5rem;
+  border-radius: 50%;
+  margin-right: 2rem;
+}

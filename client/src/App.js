@@ -18,6 +18,8 @@ import TourDetail, { loader as tourDetailLoader } from './pages/TourDetail';
 import AuthContext from './store/auth-context';
 import RootLayout from './pages/RootLayout';
 import ToursPage from './pages/Tours';
+import ManageUsers from './components/Account/Contents/ManageUsers/ManageUser';
+import MyBookings from './components/Account/Contents/MyBookings/MyBokings';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,8 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AccountSettings /> },
           { path: 'settings', element: <AccountSettings /> },
+          { path: 'my-bookings', element: <MyBookings /> },
+          { path: 'manage-users', element: <ManageUsers /> },
           {
             path: 'manage-tours',
             element: <ManageToursRoot />,

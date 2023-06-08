@@ -54,7 +54,8 @@ export const login = async (requestData) => {
 };
 
 export const getAllUsers = async (requestData) => {
-  const response = await fetch(`${api_DOMAIN}/users${requestData.params}`, {
+  console.log(`${api_DOMAIN}/users?${requestData.params}`);
+  const response = await fetch(`${api_DOMAIN}/users?${requestData.params}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -64,7 +65,7 @@ export const getAllUsers = async (requestData) => {
   const data = await response.json();
 
   if (!response.ok) {
-    let errorMessage = 'Authentication Failed';
+    let errorMessage = 'Couldnot fetch users!!!';
     if (data && data.error && data.message) errorMessage = data.message;
 
     throw new Error(errorMessage);
@@ -148,4 +149,30 @@ export const updateMe = async (userData, token, type) => {
   }
 
   return data;
+};
+
+export const getMyBookings = async (requestData) => {
+  const response = await fetch(
+    `${api_DOMAIN}/users/${requestData.userId}/myBookings`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${requestData.token} `,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    let errorMessage = 'Couldnot fetch users!!!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  const bookings = await data.data.data;
+
+  return bookings;
 };
