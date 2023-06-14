@@ -1,11 +1,16 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { IonIcon } from 'react-ion-icon';
 
 import classes from './Menu.module.css';
-import { menuData } from './MenuData';
+import { menuData, menuDataAdmin } from './MenuData';
+import AuthContext from '../../../store/auth-context';
 
 const Menu = (props) => {
-  const menu = menuData.map((el) => (
+  const authCtx = useContext(AuthContext);
+  const data =
+    authCtx.user.data.user.role === 'admin' ? menuDataAdmin : menuData;
+  const menu = data.map((el) => (
     <li>
       <NavLink
         to={el.link}

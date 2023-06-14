@@ -33,7 +33,7 @@ const AccountSettings = (props) => {
       <div className={classes.form_container}>
         <AccountsSettingsForm user={currentUser} editUser={editUserDetails} />
       </div>
-      <p className="subheading content-heading">Your Account Settings</p>
+      <p className="subheading content-heading">Change your Password</p>
       <div className={classes.form_container}>
         <PasswordChangeForm editPassword={editPassword} />
       </div>

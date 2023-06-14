@@ -5,8 +5,8 @@ import AuthContext from '../store/auth-context';
 
 const api_DOMAIN = `http://127.0.0.1:8000/api/v1`;
 
-export const getAllTours = async () => {
-  const response = await fetch(`${api_DOMAIN}/tours`);
+export const getAllTours = async (query = '') => {
+  const response = await fetch(`${api_DOMAIN}/tours?${query}`);
   const data = await response.json();
 
   if (!response.ok) {

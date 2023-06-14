@@ -24,3 +24,17 @@
   border-radius: 50%;
   margin-right: 2rem;
 }
+/* Bellow 544px (Phones) */
+@media (max-width: 34em) {
+  .table {
+    /* margin: 4rem; */
+    font-size: 1.2rem;
+    overflow-x: scroll;
+  }
+  .photo {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    margin-right: 2rem;
+  }
+}

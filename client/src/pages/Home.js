@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <>
       <HeroSection />
-      <Suspense
+      {/* <Suspense
         fallback={
           <div style={{ textAlign: 'center' }}>
             <LoadingSpinner />
@@ -24,7 +24,8 @@ const HomePage = () => {
         <Await resolve={tours}>
           {(loadedTours) => <TourSection tours={loadedTours} />}
         </Await>
-      </Suspense>
+      </Suspense> */}
+      <TourSection />
 
       <TestimonialsSection />
       <CtaSection />

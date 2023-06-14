@@ -9,11 +9,19 @@ export const menuData = [
     icon: 'briefcase-outline',
     link: 'my-bookings',
   },
+];
+export const menuDataAdmin = [
   {
-    title: 'My Reviews',
-    icon: 'star-outline',
-    link: 'my-reviews',
+    title: 'Settings',
+    icon: 'settings',
+    link: 'settings',
   },
+  {
+    title: 'My Bookings',
+    icon: 'briefcase-outline',
+    link: 'my-bookings',
+  },
+
   {
     title: 'Manage Tours',
     icon: 'settings',

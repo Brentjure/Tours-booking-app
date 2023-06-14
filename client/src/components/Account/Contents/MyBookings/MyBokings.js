@@ -16,6 +16,7 @@ const MyBookings = () => {
   useEffect(() => {
     const fetchMyBookings = async () => {
       const bookings = await getMyBookings({ token, userId });
+      setMyBookings(bookings);
       console.log(bookings);
     };
     fetchMyBookings();

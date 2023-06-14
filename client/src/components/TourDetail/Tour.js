@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
+// import { Stripe } from 'stripe';
 
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
@@ -6,15 +7,46 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a lo
 import Reviews from './Reviews';
 import BookingCard from './BookingCard';
 import classes from './Tour.module.css';
-import userImg from '../../images/user-14.jpg';
+import AuthContext from '../../store/auth-context';
 
 const Tour = (props) => {
-  console.log(props);
-  console.log({
-    price: props.tour.price,
-    averageRatings: props.tour.averageRatings,
-    ratingsQuantity: props.tour.ratingsQuantity,
-  });
+  const authCtx = useContext(AuthContext);
+  console.log(authCtx);
+
+  let token;
+  if (authCtx.isLoggedIn) {
+    token = authCtx.user.token;
+  }
+
+  const bookTour = async () => {
+    try {
+      // 1) Get checkout session from API
+      const stripe = window.Stripe(
+        'pk_test_51KhGlaHAWczgrlmq0kCEt8jCslPiXVDchiwSsnxvmK2LoZvI23r7oeKlvpL7zPk5aZ1IXTzC93Od96lyzprMPo0v004kWG8mvg'
+      );
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/v1/bookings/checkout-session/${props.tour.id}`,
+        {
+          method: 'GET',
+          headers: {
+            // 'Content-Type': 'application/json',
+            Authorization: `Bearer ${token} `,
+          },
+        }
+      );
+      const session = await response.json();
+      // console.log(sess);
+
+      console.log(session);
+
+      // 2) Create chechoutform, charge credit card
+      await stripe.redirectToCheckout({
+        sessionId: session.session.id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Fragment>
@@ -96,6 +128,7 @@ const Tour = (props) => {
         </div>
         <div>
           <BookingCard
+            onClick={bookTour}
             price={props.tour.price}
             averageRatings={props.tour.averageRatings}
             ratingsQuantity={props.tour.ratingsQuantity}

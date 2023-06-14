@@ -11,10 +11,10 @@ const Sidebar = (props) => {
   const [show, setShow] = useState(false);
 
   return (
-    <section>
-      <button className={classes.btn_mobile_nav}>
+    <section className={classes.account}>
+      {/* <button className={classes.btn_mobile_nav}>
         <IonIcon className={classes.icon_mobile_nav} name="menu-outline" />
-      </button>
+      </button> */}
       <div className={classes.acc_container}>
         <div>
           <Menu />

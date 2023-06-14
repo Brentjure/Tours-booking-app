@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import classes from './Tour.module.css';
 
 const Tour = (props) => {
-  console.log(props.details);
   return (
     <div className={classes.tour}>
       <div className={classes['tour-header']}>

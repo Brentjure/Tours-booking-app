@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import classes from './BookingCard.module.css';
+import AuthContext from '../../store/auth-context';
 
 const BookingCard = (props) => {
-  console.log(props);
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+
   const btn = `button ${classes.btn_booking}`;
 
   return (
@@ -31,7 +35,18 @@ const BookingCard = (props) => {
         </div>
         <div className={classes.guests}>Guests</div>
       </div>
-      <button className={btn}> Book now For $ {props.price}</button>
+      {authCtx.isLoggedIn && (
+        <button className={btn} onClick={props.onClick}>
+          {' '}
+          Book now For $ {props.price}
+        </button>
+      )}
+      {!authCtx.isLoggedIn && (
+        <button className={btn} onClick={props.onClick}>
+          {' '}
+          Log in to Book For $ {props.price}
+        </button>
+      )}
       <div>
         <ul className={classes.fees}>
           <li className={classes.fees_attribute}>
