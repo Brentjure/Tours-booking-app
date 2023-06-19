@@ -1,7 +1,4 @@
-import { useContext } from 'react';
 import { json } from 'react-router-dom';
-
-import AuthContext from '../store/auth-context';
 
 const api_DOMAIN = `http://127.0.0.1:8000/api/v1`;
 
@@ -79,7 +76,7 @@ export const getAllUsers = async (requestData) => {
 export const addTour = async (requestData) => {
   const response = await fetch(`${api_DOMAIN}/tours`, {
     method: 'POST',
-    body: requestData.form,
+    body: requestData.data,
     headers: {
       // 'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${requestData.token} `,

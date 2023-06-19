@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import Navigation from './Navigation';
 import classes from './Header.module.css';
 import Auth from '../../Auth/Auth';
+import UIContext from '../../../store/ui-context';
 
 const Header = () => {
+  const UICtx = useContext(UIContext);
   const [showAuth, setShowAuth] = useState(false);
 
   const showAuthModal = () => {
@@ -23,12 +25,12 @@ const Header = () => {
   const styles = `${classes.header}`;
   return (
     <header className={styles}>
-      {showAuth && <Auth onClose={hideAuthModal} />}
+      {UICtx.modal && <Auth onClose={UICtx.closeModal} />}
 
       <NavLink to="/" className={classes.logo}>
         Tours.
       </NavLink>
-      <Navigation onShowAuth={showAuthModal} />
+      <Navigation onShowAuth={UICtx.openModal} />
     </header>
   );
 };

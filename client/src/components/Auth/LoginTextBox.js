@@ -43,8 +43,10 @@ const LoginTextBox = (props) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
+        console.log(data);
         authCtx.login(data);
+
         props.onClose();
       } else {
         const data = await response.json();

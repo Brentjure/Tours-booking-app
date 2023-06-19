@@ -4,9 +4,11 @@ import classes from './AccountSettings.module.css';
 import AccountsSettingsForm from './AccSettingsForm';
 import PasswordChangeForm from './PasswordChangeForm';
 import { updateMe } from '../../../../lib/api';
+import UIContext from '../../../../store/ui-context';
 
 const AccountSettings = (props) => {
   const authCtx = useContext(AuthContext);
+  const UICtx = useContext(UIContext);
   const user = authCtx.user.data.user;
   const [currentUser, setCurrentUser] = useState(user);
 
@@ -14,11 +16,23 @@ const AccountSettings = (props) => {
   const updateUser = authCtx.editUser;
 
   const editUserDetails = async (data) => {
-    const updatedUser = await updateMe(data, token, 'edit');
-    if (updatedUser.status === 'success') {
-      setCurrentUser(updatedUser.data.user);
-      const editedUser = { ...updatedUser, token };
-      updateUser(editedUser);
+    try {
+      const updatedUser = await updateMe(data, token, 'edit');
+      if (updatedUser.status === 'success') {
+        setCurrentUser(updatedUser.data.user);
+        const editedUser = { ...updatedUser, token };
+        UICtx.showNotification({
+          status: 'success',
+          message: 'User details updated successfully!',
+        });
+        updateUser(editedUser);
+      }
+    } catch (error) {
+      console.log(error);
+      UICtx.showNotification({
+        status: 'error',
+        message: error.message,
+      });
     }
   };
 

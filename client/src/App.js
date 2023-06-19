@@ -20,11 +20,13 @@ import RootLayout from './pages/RootLayout';
 import ToursPage from './pages/Tours';
 import ManageUsers from './components/Account/Contents/ManageUsers/ManageUser';
 import MyBookings from './components/Account/Contents/MyBookings/MyBokings';
+import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home />, loader: toursLoader },
       { path: '/', loader: toursLoader, children: [] },

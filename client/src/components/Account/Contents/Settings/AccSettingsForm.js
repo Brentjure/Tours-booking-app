@@ -4,9 +4,9 @@ import classes from './AccountSettingsForm.module.css';
 import userImg from '../../../../images/user-14.jpg';
 
 const AccountsSettingsForm = ({ user, editUser }) => {
-  const [enteredName, setEnteredName] = useState();
-  const [enteredEmail, setEnteredEmail] = useState();
-  const [enteredImage, setEnteredImage] = useState();
+  const [enteredName, setEnteredName] = useState(user.name);
+  const [enteredEmail, setEnteredEmail] = useState(user.email);
+  const [enteredImage, setEnteredImage] = useState(user.photo);
 
   const submitFormHandler = (e) => {
     e.preventDefault();

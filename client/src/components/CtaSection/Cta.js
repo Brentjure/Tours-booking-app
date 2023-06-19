@@ -10,26 +10,6 @@ const Cta = (props) => {
     setIsLoggin((prevState) => !prevState);
   };
 
-  const authHandler = async (data) => {
-    let url;
-    if (isLogin) {
-      url = `http://127.0.0.1:8000/api/v1/users/login`;
-    } else {
-      url = `http://127.0.0.1:8000/api/v1/users/signup`;
-    }
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          email: data.enteredEmail,
-          password: data.enteredPassword,
-        }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-    } catch (error) {}
-  };
-
   return (
     <div className={classes.cta}>
       {!isLogin && <SignUpTextBox onClose={props.onClose} onToggle={toggle} />}

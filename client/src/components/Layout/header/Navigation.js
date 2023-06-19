@@ -1,21 +1,23 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 
 import classes from './Navigation.module.css';
-import userImg from '../../../images/user-14.jpg';
 import AuthContext from '../../../store/auth-context';
-// a.main-nav-link.loggedin(href='/me')
-//             img(class="nav-user-photo" src=`img/users/${user.photo}`, alt=`Photo of ${user.name}`)
-//             span=`Hi ${user.name.split(' ')[0]}.`
 
 const Navigation = (props) => {
   const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
   let user;
 
   if (authCtx.isLoggedIn) {
     user = authCtx.user.data.user;
-    // const userPhoto = `http://127.0.0.1:8000/images/users/${user.photo}`;
   }
+
+  const logoutHandler = () => {
+    // navigate('..');
+    redirect('/');
+    authCtx.logout();
+  };
 
   const styles = `${classes['main-nav-link']} ${classes['nav-cta']}`;
   const account = `${classes['main-nav-link']} ${classes['nav-acc']}`;
@@ -26,7 +28,7 @@ const Navigation = (props) => {
 
         {authCtx.isLoggedIn && (
           <li>
-            <Link className={classes['main-nav-link']} onClick={authCtx.logout}>
+            <Link className={classes['main-nav-link']} onClick={logoutHandler}>
               Log Out
             </Link>
           </li>

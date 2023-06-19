@@ -1,12 +1,11 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import { IoAddOutline } from 'react-icons/io5';
 
 import classes from './TourForm.module.css';
-import { getAllUsers, addTour, updateTour } from '../../../../lib/api';
+import { updateTour } from '../../../../lib/api';
 import { createFormData } from '../../../../lib/createFormData';
-import AuthContext from '../../../../store/auth-context';
 
-const TourForm = ({ tour }) => {
+const TourForm = ({ tour, createTour }) => {
   const [locations, setLocations] = useState([
     {
       address: '',
@@ -20,8 +19,6 @@ const TourForm = ({ tour }) => {
   const [enteredImage2, setEnteredImage2] = useState();
   const [enteredImage3, setEnteredImage3] = useState();
   const [startDates, setStartDates] = useState(['']);
-
-  const token = useContext(AuthContext).user.token;
 
   const nameInputRef = useRef();
   const durationInputRef = useRef();
@@ -76,7 +73,7 @@ const TourForm = ({ tour }) => {
     setStartDates(data);
   };
 
-  const submitFormHandler = (e) => {
+  const submitFormHandler = async (e) => {
     e.preventDefault();
     const enteredLocations = locations.map((el) => ({
       type: 'Point',
@@ -114,12 +111,13 @@ const TourForm = ({ tour }) => {
       enteredImageCover,
       images
     );
-
-    const tourId = tour.id;
-
+    console.log(tour);
     if (tour) {
-      updateTour({ form, token, tourId });
-    } else addTour({ form, token });
+      const tourId = tour.id;
+      updateTour({ form, tourId });
+    } else {
+      createTour(form);
+    }
   };
 
   const tourStops = tour ? tour.locations : locations;
