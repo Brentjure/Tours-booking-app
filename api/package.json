@@ -2,9 +2,10 @@
   "name": "tour-booking-app",
   "version": "1.0.0",
   "description": "tour booing api",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
+    "dev": "nodemon server.js",
     "start:prod": "SET NODE_ENV=production&&nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -38,5 +39,8 @@
     "uuidv4": "^6.2.13",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
+  },
+  "engines": {
+    "node": "^16"
   }
 }
