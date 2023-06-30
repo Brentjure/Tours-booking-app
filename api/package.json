@@ -2,7 +2,7 @@
   "name": "tour-booking-app",
   "version": "1.0.0",
   "description": "tour booing api",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "SET NODE_ENV=production&&nodemon server.js",
