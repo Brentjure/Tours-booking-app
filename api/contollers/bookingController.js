@@ -20,7 +20,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     success_url: `http://127.0.0.1:3000/`,
-    cancel_url: `http://127.0.0.1:3000/account/my-bookings`,
+    cancel_url: `https://tour-booking-app.netlify.app/account/my-bookings`,
     // success_url: `${req.protocol}://${req.get('host')}/`,
     // cancel_url: `${req.protocol}://${req.get('host')}/tours/${tour.id}`,
     customer_email: req.user.email,
