@@ -1,10 +1,9 @@
 import classes from './GalleryItem.module.css';
-import photo from '../../images/tour-1-1.jpg';
 
-const GalleryItem = () => {
+const GalleryItem = ({ photo }) => {
   return (
     <figure className={classes.gallery_item}>
-      <img src={photo} alt="tour scenes" />
+      <img src={`http://127.0.0.1:3000/${photo}`} alt="tour scenes" />
     </figure>
   );
 };

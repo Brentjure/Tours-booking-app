@@ -1,12 +1,15 @@
 .table {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   width: 100%;
   margin: 1rem, 0;
   /* border-spacing: 5rem; */
+  overflow: scroll;
 }
 
 .rows {
   margin-bottom: 2rem;
+  border-bottom: #555 solid 1px;
+  /* background-color: red; */
 }
 
 .headings {
@@ -19,10 +22,11 @@
 }
 
 .photo {
-  height: 6.5rem;
-  width: 6.5rem;
+  height: 5rem;
+  width: 5rem;
   border-radius: 50%;
   margin-right: 2rem;
+  padding: 0.5rem;
 }
 /* Bellow 544px (Phones) */
 @media (max-width: 34em) {

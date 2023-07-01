@@ -60,3 +60,24 @@
     gap: 3.2rem;
   }
 }
+
+@media (max-width: 44em) {
+  .main-nav-list {
+    gap: 2.4rem;
+  }
+
+  .main-nav-link:link,
+  .main-nav-link:visited {
+    font-size: 1.6rem;
+  }
+
+  .user-img {
+    height: 3rem;
+    width: 3rem;
+    /* align-self: center; */
+  }
+
+  .nav-acc {
+    gap: 1.2rem;
+  }
+}

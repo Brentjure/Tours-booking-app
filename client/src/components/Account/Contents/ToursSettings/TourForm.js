@@ -111,7 +111,6 @@ const TourForm = ({ tour, createTour }) => {
       enteredImageCover,
       images
     );
-    console.log(tour);
     if (tour) {
       const tourId = tour.id;
       updateTour({ form, tourId });
@@ -157,16 +156,13 @@ const TourForm = ({ tour, createTour }) => {
   ));
 
   const startDate = tour ? tour.startDates : startDates;
-  console.log(startDate);
 
   const dates = startDate.map((input, index) => {
-    console.log(input);
     const date = new Date(input);
     const getYear = date.toLocaleString('default', { year: 'numeric' });
     const getMonth = date.toLocaleString('default', { month: '2-digit' });
     const getDay = date.toLocaleString('default', { day: '2-digit' });
     const dateFormat = getYear + '-' + getMonth + '-' + getDay;
-    console.log(dateFormat);
 
     return (
       <div key={index}>

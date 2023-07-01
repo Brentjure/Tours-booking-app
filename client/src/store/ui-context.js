@@ -15,6 +15,7 @@ export const UIContextProvider = (props) => {
 
   const openModal = () => {
     setShowModal(true);
+    window.scrollTo(0, 0);
 
     if (typeof window != 'undefined' && window.document)
       document.body.style.overflow = 'hidden';

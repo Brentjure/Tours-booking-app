@@ -1,6 +1,6 @@
 import { json } from 'react-router-dom';
 
-const api_DOMAIN = `http://127.0.0.1:8000/api/v1`;
+const api_DOMAIN = `https://tours-booking-app-api.onrender.com/api/v1`;
 
 export const getAllTours = async (query = '') => {
   const response = await fetch(`${api_DOMAIN}/tours?${query}`);
@@ -37,21 +37,44 @@ export const login = async (requestData) => {
     }),
     headers: { 'Content-Type': 'application/json' },
   });
-  const data = await response.json();
 
   if (!response.ok) {
     const data = await response.json();
-    let errorMessage = 'Authentication Failed';
+    let errorMessage = 'Authentication Failed. Please try again!';
     if (data && data.error && data.message) errorMessage = data.message;
 
     throw new Error(errorMessage);
   }
 
+  const data = await response.json();
+
+  return data;
+};
+export const signUp = async (requestData) => {
+  const response = await fetch(`${api_DOMAIN}/users/signup`, {
+    method: 'POST',
+    body: JSON.stringify({
+      name: requestData.name,
+      email: requestData.email,
+      password: requestData.password,
+      passwordConfirm: requestData.passwordConfirm,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    let errorMessage = 'Sign up Failed';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+  const data = await response.json();
+
   return data;
 };
 
 export const getAllUsers = async (requestData) => {
-  console.log(`${api_DOMAIN}/users?${requestData.params}`);
   const response = await fetch(`${api_DOMAIN}/users?${requestData.params}`, {
     method: 'GET',
     headers: {
@@ -73,6 +96,28 @@ export const getAllUsers = async (requestData) => {
   return users;
 };
 
+export const forgotPassword = async (email) => {
+  console.log(JSON.stringify(email));
+  const response = await fetch(`${api_DOMAIN}/users/forgotPassword`, {
+    method: 'POST',
+    body: JSON.stringify(email),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    let errorMessage = 'Could not send token!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  return data;
+};
+
 export const addTour = async (requestData) => {
   const response = await fetch(`${api_DOMAIN}/tours`, {
     method: 'POST',
@@ -84,7 +129,6 @@ export const addTour = async (requestData) => {
   });
 
   const data = await response.json();
-  console.log(data);
 
   if (!response.ok) {
     let errorMessage = 'Could not create tour!';
@@ -172,4 +216,65 @@ export const getMyBookings = async (requestData) => {
   const bookings = await data.data.data;
 
   return bookings;
+};
+
+export const getAllReviews = async (query = '') => {
+  const response = await fetch(`${api_DOMAIN}/reviews?${query}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    let errorMessage = 'Couldnot fetch users!!!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  const reviews = await data.data.data;
+
+  return reviews;
+};
+
+export const deleteReview = async ({ reviewId, token }) => {
+  const response = await fetch(`${api_DOMAIN}/reviews/${reviewId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token} `,
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    let errorMessage = 'Couldnot delete review!!!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  const reviews = await data.data.data;
+
+  return reviews;
+};
+
+export const getReviewsOnTour = async ({ query = '', tourId }) => {
+  const response = await fetch(
+    `${api_DOMAIN}/tours/${tourId}/reviews?${query}`
+  );
+  const data = await response.json();
+
+  if (!response.ok) {
+    let errorMessage = 'Couldnot fetch reviews!!!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  const reviews = await data.data.data;
+
+  return reviews;
 };

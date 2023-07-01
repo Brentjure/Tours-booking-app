@@ -57,7 +57,7 @@ const AccountsSettingsForm = ({ user, editUser }) => {
       <div className={classes.photo_upload}>
         <img
           className={classes.form_user_img}
-          src={`http://127.0.0.1:8000/images/users/${user.photo}`}
+          src={`https://tours-booking-app-api.onrender.com/images/users/${user.photo}`}
           alt="User "
         />
         <input
@@ -74,7 +74,7 @@ const AccountsSettingsForm = ({ user, editUser }) => {
         <label htmlFor="photo">Choose new photo</label>
       </div>
       <div className={classes.btn_form}>
-        <button className={btn}>Save settings</button>
+        <button className="button">Save settings</button>
       </div>
     </form>
   );

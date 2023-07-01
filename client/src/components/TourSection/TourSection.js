@@ -22,9 +22,11 @@ const TourSection = () => {
     if (!name && !price) {
       q = '';
     } else {
-      q = `search=${name ? name : ''}&price[lte]=${price ? price : ''}`;
+      q = `${name ? `search=${name}` : ''}${
+        price ? `&price[lte]=${price}` : ''
+      }`;
     }
-    console.log(q);
+
     sendRequest(q);
   }, [sendRequest, name, price]);
 
@@ -44,9 +46,11 @@ const TourSection = () => {
 
   return (
     <section className={classes['section-tours']}>
-      <div class="container center-text">
-        <span class="subheading">Tours</span>
-        <h2 class="heading-secondary">Exciting tours for adventures people.</h2>
+      <div className="container center-text">
+        <span className="subheading">Tours</span>
+        <h2 className="heading-secondary">
+          Exciting tours for adventures people.
+        </h2>
         {/* <FilterContainer filterTours={filterTours} status={status} /> */}
         <div className={classes.form}>
           <div>
@@ -55,7 +59,7 @@ const TourSection = () => {
               type="text"
               name=""
               id="name"
-              placeholder="Where are you going?"
+              placeholder="Enter the name of the tour"
               onChange={(e) => {
                 setName(e.target.value);
               }}

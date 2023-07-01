@@ -7,7 +7,7 @@ const Tour = (props) => {
       <div className={classes['tour-header']}>
         <img
           className={classes['tour-img']}
-          src={`http://127.0.0.1:8000/images/tours/${props.details.imageCover}`}
+          src={`https://tours-booking-app-api.onrender.com/images/tours/${props.details.imageCover}`}
           alt="an elephant"
         />
         <div className={classes['tour-heading']}>

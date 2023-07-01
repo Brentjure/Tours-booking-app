@@ -6,10 +6,10 @@ import TourSection from '../components/TourSection/TourSection';
 import TestimonialsSection from '../components/TestimonialSection/TestimonialsSection';
 import CtaSection from '../components/CtaSection/CtaSection';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
-import { getAllTours } from '../lib/api';
+import { getAllReviews, getAllTours } from '../lib/api';
 
 const HomePage = () => {
-  const { tours } = useLoaderData();
+  const { reviews } = useLoaderData();
 
   return (
     <>
@@ -27,7 +27,7 @@ const HomePage = () => {
       </Suspense> */}
       <TourSection />
 
-      <TestimonialsSection />
+      <TestimonialsSection reviews={reviews} />
       <CtaSection />
     </>
   );
@@ -35,8 +35,9 @@ const HomePage = () => {
 
 export default HomePage;
 
-export const loader = ({ request, params }) => {
+export const loader = async ({ request, params }) => {
   return defer({
     tours: getAllTours(),
+    reviews: await getAllReviews('page=1&limit=4&rating[gte]=4.5'),
   });
 };

@@ -68,6 +68,11 @@
   box-shadow: 0 0 0 0.8rem #fdf2e980;
 }
 
+.error {
+  background-color: #f4dddd;
+  color: #b71c1c;
+}
+
 /* Bellow 944px (Tablets) */
 @media (max-width: 59em) {
   .cta {

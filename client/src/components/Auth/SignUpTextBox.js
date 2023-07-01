@@ -1,6 +1,23 @@
+import { useRef } from 'react';
 import classes from './SignUpTextBox.module.css';
 
-const SignUpTextBox = (props) => {
+const SignUpTextBox = ({ onClose, onToggle, signUp, status, user, error }) => {
+  const nameInputRef = useRef();
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+  const confirmPasswordInputRef = useRef();
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+
+    const name = nameInputRef.current.value;
+    const email = emailInputRef.current.value;
+    const password = passwordInputRef.current.value;
+    const passwordConfirm = confirmPasswordInputRef.current.value;
+
+    signUp({ name, email, password, passwordConfirm });
+  };
+
   return (
     <div className={classes.cta_text_box}>
       <h2 className="heading-secondary">Your adventure starts here!</h2>
@@ -8,7 +25,9 @@ const SignUpTextBox = (props) => {
       <p className={classes.cta_text}>
         Create an Account now to book your dream tour!
       </p>
-      <form className={classes.cta_form}>
+      {error && <p className={classes.error}>{error}</p>}
+
+      <form className={classes.cta_form} onSubmit={submitFormHandler}>
         <div>
           <label htmlFor="full-name">Full Name</label>
           <input
@@ -16,6 +35,7 @@ const SignUpTextBox = (props) => {
             id="full-name"
             placeholder="Brent Otieno"
             required
+            ref={nameInputRef}
           />
         </div>
         <div>
@@ -26,6 +46,7 @@ const SignUpTextBox = (props) => {
             id="email"
             placeholder="me@example.com"
             required
+            ref={emailInputRef}
           />
         </div>
         <div>
@@ -36,6 +57,7 @@ const SignUpTextBox = (props) => {
             id="password"
             placeholder="••••••••"
             required
+            ref={passwordInputRef}
           />
         </div>
         <div>
@@ -46,14 +68,19 @@ const SignUpTextBox = (props) => {
             id="confirm-password"
             placeholder="••••••••"
             required
+            ref={confirmPasswordInputRef}
           />
         </div>
 
-        <button class="button btn--form">Sign up now</button>
+        <button class="button btn--form">
+          {status === 'pending' ? 'Processing' : 'Sign up now!'}
+        </button>
       </form>
+      {error && <p className={classes.error}>{error}</p>}
+
       <em className={classes.have_account}>
         Already have an account?{' '}
-        <span className="toggle" onClick={props.onToggle}>
+        <span className="toggle" onClick={onToggle}>
           Login to Tours
         </span>
       </em>

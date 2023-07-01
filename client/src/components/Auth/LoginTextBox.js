@@ -5,14 +5,17 @@ import AuthContext from '../../store/auth-context';
 import { login } from '../../lib/api';
 import classes from './LoginTextBox.module.css';
 
-const LoginTextBox = (props) => {
-  // const { data, error, status, sendRequest } = useHttps(login, false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+const LoginTextBox = ({
+  onClose,
+  onToggle,
+  login,
+  status,
+  user,
+  error,
+  forgotPassword,
+}) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-
-  const authCtx = useContext(AuthContext);
 
   const submitFormHandler = async (e) => {
     e.preventDefault();
@@ -20,46 +23,7 @@ const LoginTextBox = (props) => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
-    // const requestData = { email: enteredEmail, password: enteredPassword };
-
-    // sendRequest(requestData);
-    // authCtx.login(data);
-
-    setIsLoading(true);
-
-    const url = `http://127.0.0.1:8000/api/v1/users/login`;
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-        }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      setIsLoading(false);
-
-      if (response.ok) {
-        const data = await response.json();
-        // console.log(JSON.stringify(data));
-        console.log(data);
-        authCtx.login(data);
-
-        props.onClose();
-      } else {
-        const data = await response.json();
-
-        let errorMessage = 'Authentication Failed';
-        if (data && data.error && data.message) errorMessage = data.message;
-
-        throw new Error(errorMessage);
-      }
-    } catch (error) {
-      console.log(error);
-      setError(error);
-    }
+    login({ email: enteredEmail, password: enteredPassword });
   };
 
   return (
@@ -91,16 +55,16 @@ const LoginTextBox = (props) => {
           />
         </div>
         <button className="button btn--form">
-          {isLoading ? 'Loading' : 'Login to your Account'}
+          {status === 'pending' ? 'Loading' : 'Login to your Account'}
         </button>
-        <div className={classes.forgot_password}>
+        <div className={classes.forgot_password} onClick={forgotPassword}>
           <p>Forgot your password?</p>
         </div>
       </form>
-      {error && <p className={classes.error}>{error.message}</p>}
+      {error && <p className={classes.error}>{error}</p>}
       <em className={classes.have_account}>
         Don't have an account?{' '}
-        <span className="toggle" onClick={props.onToggle}>
+        <span className="toggle" onClick={onToggle}>
           Sign up to Tours
         </span>
       </em>

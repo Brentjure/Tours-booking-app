@@ -4,9 +4,12 @@ import { defer, Await, useRouteLoaderData } from 'react-router-dom';
 import { getTour } from '../lib/api';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import Tour from '../components/TourDetail/Tour';
+import { getReviewsOnTour } from '../lib/api';
 
 const TourDetails = () => {
-  const { tour } = useRouteLoaderData('tour-detail');
+  const { tour, reviews } = useRouteLoaderData('tour-detail');
+
+  console.log(reviews);
 
   return (
     <>
@@ -18,7 +21,7 @@ const TourDetails = () => {
         }
       >
         <Await resolve={tour}>
-          {(loadedTour) => <Tour tour={loadedTour} />}
+          {(loadedTour) => <Tour tour={loadedTour} reviews={reviews} />}
         </Await>
       </Suspense>
     </>
@@ -27,10 +30,11 @@ const TourDetails = () => {
 
 export default TourDetails;
 
-export const loader = ({ request, params }) => {
+export const loader = async ({ request, params }) => {
   const tourId = params.tourId;
 
   return defer({
     tour: getTour(tourId),
+    reviews: await getReviewsOnTour({ tourId }),
   });
 };

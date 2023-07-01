@@ -61,7 +61,7 @@ const PasswordChangeForm = ({ editPassword }) => {
         />
       </div>
       <div className={classes.btn_form}>
-        <button className="btn form-btn">save password</button>
+        <button className="button form-btn">save password</button>
       </div>
     </form>
   );

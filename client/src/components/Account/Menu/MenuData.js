@@ -13,7 +13,7 @@ export const menuData = [
 export const menuDataAdmin = [
   {
     title: 'Settings',
-    icon: 'settings',
+    icon: 'settings-outline',
     link: 'settings',
   },
   {
@@ -24,22 +24,22 @@ export const menuDataAdmin = [
 
   {
     title: 'Manage Tours',
-    icon: 'settings',
+    icon: 'airplane-outline',
     link: 'manage-tours/all-tours',
   },
   {
     title: 'Manage Bookings',
-    icon: 'settings',
+    icon: 'briefcase-outline',
     link: 'manage-bookings',
   },
   {
     title: 'Manage Users',
-    icon: 'settings',
+    icon: 'people-outline',
     link: 'manage-users',
   },
   {
     title: 'Manage Reviews',
-    icon: 'settings',
+    icon: 'clipboard-outline',
     link: 'manage-reviews',
   },
 ];

@@ -11,7 +11,6 @@ import AuthContext from '../../store/auth-context';
 
 const Tour = (props) => {
   const authCtx = useContext(AuthContext);
-  console.log(authCtx);
 
   let token;
   if (authCtx.isLoggedIn) {
@@ -25,7 +24,7 @@ const Tour = (props) => {
         'pk_test_51KhGlaHAWczgrlmq0kCEt8jCslPiXVDchiwSsnxvmK2LoZvI23r7oeKlvpL7zPk5aZ1IXTzC93Od96lyzprMPo0v004kWG8mvg'
       );
       const response = await fetch(
-        `http://127.0.0.1:8000/api/v1/bookings/checkout-session/${props.tour.id}`,
+        `https://tours-booking-app-api.onrender.com/api/v1/bookings/checkout-session/${props.tour.id}`,
         {
           method: 'GET',
           headers: {
@@ -55,7 +54,7 @@ const Tour = (props) => {
           <div className={classes['hero-section-img-container']}>
             <img
               className={classes['hero-img']}
-              src={`http://127.0.0.1:8000/images/tours/${props.tour.imageCover}`}
+              src={`https://tours-booking-app-api.onrender.com/images/tours/${props.tour.imageCover}`}
               alt="beach party"
             />
           </div>
@@ -115,7 +114,7 @@ const Tour = (props) => {
                   <figure className={classes.tour_guide}>
                     <img
                       className={classes.guide_img}
-                      src={`http://127.0.0.1:8000/images/users/${el.photo}`}
+                      src={`https://tours-booking-app-api.onrender.com/images/users/${el.photo}`}
                       alt="img of a tour a tour guide"
                     />
                     <span className={classes.guide_role}>{el.role}</span>
@@ -143,7 +142,7 @@ const Tour = (props) => {
               {props.tour.images.map((img, index) => (
                 <div className={classes.image} key={index}>
                   <img
-                    src={`http://127.0.0.1:8000/images/tours/${img}`}
+                    src={`https://tours-booking-app-api.onrender.com/images/tours/${img}`}
                     alt="a tour guide"
                   />
                 </div>
@@ -154,7 +153,11 @@ const Tour = (props) => {
       </section>
       <section className="container">
         <div className={classes.review}>
-          <Reviews />
+          <Reviews
+            reviews={props.reviews}
+            ratings={props.tour.averageRatings}
+            ratingsQuantity={props.tour.ratingsQuantity}
+          />
         </div>
       </section>
     </Fragment>

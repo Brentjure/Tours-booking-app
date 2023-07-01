@@ -15,7 +15,7 @@ const Users = ({ users }) => {
               <td className={classes.name}>
                 <img
                   className={classes.photo}
-                  src={`http://127.0.0.1:8000/images/users/${user.photo}`}
+                  src={`https://tours-booking-app-api.onrender.com/images/users/${user.photo}`}
                   alt="User "
                 />
                 <span>{user.name}</span>

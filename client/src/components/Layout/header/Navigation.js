@@ -14,34 +14,36 @@ const Navigation = (props) => {
   }
 
   const logoutHandler = () => {
-    // navigate('..');
-    redirect('/');
     authCtx.logout();
   };
 
   const styles = `${classes['main-nav-link']} ${classes['nav-cta']}`;
   const account = `${classes['main-nav-link']} ${classes['nav-acc']}`;
   return (
-    <nav>
+    <nav className={classes.nav}>
       <ul className={classes['main-nav-list']}>
         {/* if logged in */}
 
         {authCtx.isLoggedIn && (
           <li>
-            <Link className={classes['main-nav-link']} onClick={logoutHandler}>
+            <Link
+              to="/"
+              className={classes['main-nav-link']}
+              onClick={logoutHandler}
+            >
               Log Out
             </Link>
           </li>
         )}
-        <li>
+        {/* <li>
           <Link className={classes['main-nav-link']}>Tours</Link>
-        </li>
+        </li> */}
         {authCtx.isLoggedIn && (
           <li>
             <Link to="/account/settings" className={account}>
               <img
                 className={classes['user-img']}
-                src={`http://127.0.0.1:8000/images/users/${user.photo}`}
+                src={`https://tours-booking-app-api.onrender.com/images/users/${user.photo}`}
                 alt="user"
               />
               <span>{`Hi, ${user.name.split(' ')[0]}`}</span>

@@ -30,10 +30,10 @@ const AllTours = () => {
   if (status === 'completed' && (!loadedTours || loadedTours.length === 0))
     content = <p>No Tours found</p>;
   if (status === 'completed' && loadedTours)
-    content = loadedTours.map((tour) => (
-      <li className={classes.item}>
+    content = loadedTours.map((tour, i) => (
+      <li key={i} className={classes.item}>
         <img
-          src={`http://127.0.0.1:8000/images/tours/${tour.imageCover}`}
+          src={`https://tours-booking-app-api.onrender.com/images/tours/${tour.imageCover}`}
           alt=""
         />
         <div className={classes.details}>

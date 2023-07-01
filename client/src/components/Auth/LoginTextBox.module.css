@@ -67,12 +67,19 @@
   outline: none;
   box-shadow: 0 0 0 0.8rem #fdf2e980;
 }
+.error {
+  color: #b71c1c;
+  background-color: #f4dddd;
+  padding: 2rem;
+  max-width: 70%;
+}
 
 .forgot_password {
   align-items: center;
   font-size: 1.6rem;
   align-self: center;
   color: #d31e3d;
+  cursor: pointer;
 }
 
 /* Bellow 944px (Tablets) */

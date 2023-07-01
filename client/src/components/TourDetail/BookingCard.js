@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import classes from './BookingCard.module.css';
 import AuthContext from '../../store/auth-context';
+import UIContext from '../../store/ui-context';
 
 const BookingCard = (props) => {
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.isLoggedIn;
+  const UICtx = useContext(UIContext);
 
   const btn = `button ${classes.btn_booking}`;
 
@@ -42,7 +43,7 @@ const BookingCard = (props) => {
         </button>
       )}
       {!authCtx.isLoggedIn && (
-        <button className={btn} onClick={props.onClick}>
+        <button className={btn} onClick={UICtx.openModal}>
           {' '}
           Log in to Book For $ {props.price}
         </button>

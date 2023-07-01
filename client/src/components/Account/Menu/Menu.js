@@ -10,8 +10,8 @@ const Menu = (props) => {
   const authCtx = useContext(AuthContext);
   const data =
     authCtx.user.data.user.role === 'admin' ? menuDataAdmin : menuData;
-  const menu = data.map((el) => (
-    <li>
+  const menu = data.map((el, index) => (
+    <li key={index}>
       <NavLink
         to={el.link}
         className={(navData) =>
@@ -20,7 +20,7 @@ const Menu = (props) => {
             : `${classes.side_el}`
         }
       >
-        <IonIcon className={classes.side_menu_icon} name={el.icon} />
+        <ion-icon className={classes.side_menu_icon} name={el.icon}></ion-icon>
         <span>{el.title}</span>
       </NavLink>
     </li>

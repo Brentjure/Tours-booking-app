@@ -10,14 +10,11 @@ const MyBookings = () => {
   const user = useContext(AuthContext).user;
   const token = user.token;
   const userId = user.data.user._id;
-  //   console.log(token, userId);
-  //   console.log(user.data.user._id);
 
   useEffect(() => {
     const fetchMyBookings = async () => {
       const bookings = await getMyBookings({ token, userId });
       setMyBookings(bookings);
-      console.log(bookings);
     };
     fetchMyBookings();
   }, [token, userId]);
@@ -41,7 +38,11 @@ const MyBookings = () => {
                 <td>{booking.paid ? 'paid' : 'pending'}</td>
               </tr>
             ))}
-          {!mybookings && <t>No document found....</t>}
+          {!mybookings && (
+            <tr>
+              <td>No document found....</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </>

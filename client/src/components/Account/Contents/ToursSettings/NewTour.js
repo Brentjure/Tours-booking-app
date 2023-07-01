@@ -7,7 +7,6 @@ import AuthContext from '../../../../store/auth-context';
 const NewTour = (props) => {
   const UICtx = useContext(UIContext);
   const token = useContext(AuthContext).user.token;
-  console.log(token);
 
   const createTour = async (data) => {
     try {

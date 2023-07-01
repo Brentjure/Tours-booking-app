@@ -1,0 +1,53 @@
+.reviews {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  font-size: 1.8rem;
+  margin-bottom: 4rem;
+  border: 1px solid #5555;
+  border-radius: 11px;
+  padding: 2rem;
+}
+
+.tour {
+  color: #002246;
+  /* font-weight: 700; */
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #b71c1c;
+  background-color: #f4dddd;
+  border-radius: 3px;
+  padding: 1rem;
+  align-self: center;
+  cursor: pointer;
+  width: 70%;
+}
+
+.icon {
+  color: #b71c1c;
+  background-color: #f4dddd;
+  border: none;
+  font-size: 1.8rem;
+}
+
+.paginate {
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto;
+  align-items: right;
+}
+
+/*******************************/
+/* BELLOW 544px (Phones) */
+/*******************************/
+@media (max-width: 44em) {
+  .reviews {
+    grid-template-columns: 1fr;
+  }
+}
