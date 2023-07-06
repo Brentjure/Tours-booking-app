@@ -22,20 +22,22 @@ const Testimonials = ({ reviews }) => {
   let content;
   galleryItems = photos.map((el, i) => <GalleryItem key={i} photo={el} />);
 
-  content = reviews.map((review, i) => (
-    <Testimonial
-      key={i}
-      photo={review.user.photo}
-      rating={review.rating}
-      review={review.review}
-      name={review.user.name}
-    />
-  ));
+  if (reviews)
+    content = reviews.map((review, i) => (
+      <Testimonial
+        key={i}
+        photo={review.user.photo}
+        rating={review.rating}
+        review={review.review}
+        name={review.user.name}
+      />
+    ));
+
   return (
     <section className={classes.section_testimonials}>
       <div className={classes.testimonial_container}>
-        <span class="subheading">testimonials</span>
-        <h2 class="heading-secondary">We make people genuinely happy!</h2>
+        <span className="subheading">testimonials</span>
+        <h2 className="heading-secondary">We make people genuinely happy!</h2>
         <div className={classes.testimonials}>{content}</div>
       </div>
       <div className={classes.gallery}>{galleryItems}</div>

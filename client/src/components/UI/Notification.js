@@ -5,7 +5,6 @@ import UIContext from '../../store/ui-context';
 const Notification = (props) => {
   const UICtx = useContext(UIContext);
   let specialClasses = '';
-  console.log(props.status);
 
   if (props.status === 'error') specialClasses = classes.error;
   if (props.status === 'success') specialClasses = classes.success;

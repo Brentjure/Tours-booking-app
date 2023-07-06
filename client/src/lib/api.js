@@ -97,7 +97,6 @@ export const getAllUsers = async (requestData) => {
 };
 
 export const forgotPassword = async (email) => {
-  console.log(JSON.stringify(email));
   const response = await fetch(`${api_DOMAIN}/users/forgotPassword`, {
     method: 'POST',
     body: JSON.stringify(email),
@@ -110,6 +109,29 @@ export const forgotPassword = async (email) => {
 
   if (!response.ok) {
     let errorMessage = 'Could not send token!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  return data;
+};
+export const resetPassword = async (requestData) => {
+  const response = await fetch(
+    `${api_DOMAIN}/users/resetPassword/${requestData.token}`,
+    {
+      method: 'PATCH',
+      body: JSON.stringify(requestData.data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    let errorMessage = 'Could not reset Password!';
     if (data && data.error && data.message) errorMessage = data.message;
 
     throw new Error(errorMessage);
@@ -151,7 +173,6 @@ export const updateTour = async (requestData) => {
   });
 
   const data = await response.json();
-  console.log(data);
 
   if (!response.ok) {
     let errorMessage = 'Could not create tour!';
@@ -164,7 +185,6 @@ export const updateTour = async (requestData) => {
 };
 
 export const updateMe = async (userData, token, type) => {
-  console.log(userData);
   const url =
     type === 'password'
       ? `${api_DOMAIN}/users/updatePassword`
@@ -180,7 +200,6 @@ export const updateMe = async (userData, token, type) => {
   });
 
   const data = await response.json();
-  console.log(data);
 
   if (!response.ok) {
     let errorMessage = 'Could not create tour!';
@@ -277,4 +296,48 @@ export const getReviewsOnTour = async ({ query = '', tourId }) => {
   const reviews = await data.data.data;
 
   return reviews;
+};
+
+export const getAllBookings = async ({ query = '', token }) => {
+  const response = await fetch(`${api_DOMAIN}/bookings?${query}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token} `,
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    let errorMessage = 'Couldnot fetch users!!!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  const bookings = await data.data.data;
+
+  return bookings;
+};
+
+export const deleteBooking = async ({ reviewId, token }) => {
+  const response = await fetch(`${api_DOMAIN}/reviews/${reviewId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token} `,
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    let errorMessage = 'Couldnot delete booking!!!';
+    if (data && data.error && data.message) errorMessage = data.message;
+
+    throw new Error(errorMessage);
+  }
+
+  const booking = await data.data.data;
+
+  return booking;
 };

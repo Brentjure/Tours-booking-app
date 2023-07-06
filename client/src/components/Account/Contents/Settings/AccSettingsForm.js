@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import classes from './AccountSettingsForm.module.css';
-import userImg from '../../../../images/user-14.jpg';
 
 const AccountsSettingsForm = ({ user, editUser }) => {
   const [enteredName, setEnteredName] = useState(user.name);
@@ -16,20 +15,9 @@ const AccountsSettingsForm = ({ user, editUser }) => {
     form.append('email', enteredEmail);
     form.append('photo', enteredImage);
 
-    console.log({
-      name: enteredName,
-      email: enteredEmail,
-      photo: enteredImage,
-    });
-
-    for (const pair of form.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
-
     editUser(form);
   };
 
-  const btn = `btn ${classes.btn_form}`;
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
       <div>
@@ -68,7 +56,6 @@ const AccountsSettingsForm = ({ user, editUser }) => {
           name="photo"
           onChange={(e) => {
             setEnteredImage(e.target.files[0]);
-            console.log(e.target.files[0]);
           }}
         />
         <label htmlFor="photo">Choose new photo</label>

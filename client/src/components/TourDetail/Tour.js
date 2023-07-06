@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 // import { Stripe } from 'stripe';
 
 import { Carousel } from 'react-responsive-carousel';
@@ -8,9 +8,22 @@ import Reviews from './Reviews';
 import BookingCard from './BookingCard';
 import classes from './Tour.module.css';
 import AuthContext from '../../store/auth-context';
+import UIContext from '../../store/ui-context';
+import { getReviewsOnTour } from '../../lib/api';
+import useHttps from '../../hooks/use-https';
 
 const Tour = (props) => {
   const authCtx = useContext(AuthContext);
+  const uiCtx = useContext(UIContext);
+
+  const { sendRequest, status, data, error } = useHttps(
+    getReviewsOnTour,
+    false
+  );
+
+  useEffect(() => {
+    sendRequest({ tourId: props.tour.id });
+  }, [sendRequest, props.tour.id]);
 
   let token;
   if (authCtx.isLoggedIn) {
@@ -34,16 +47,13 @@ const Tour = (props) => {
         }
       );
       const session = await response.json();
-      // console.log(sess);
-
-      console.log(session);
 
       // 2) Create chechoutform, charge credit card
       await stripe.redirectToCheckout({
         sessionId: session.session.id,
       });
     } catch (err) {
-      console.log(err);
+      uiCtx.showNotification({ type: 'error', message: err });
     }
   };
 
@@ -73,7 +83,7 @@ const Tour = (props) => {
       <section className={classes.content}>
         <div>
           <div className={classes.overview_header}>
-            <span class="heading-secondary">
+            <span className="heading-secondary">
               {props.tour.name}: {props.tour.duration} days tour.
             </span>
             {/* <h2 class="heading-secondary">Exciting tours for adventures people.</h2> */}
@@ -103,15 +113,15 @@ const Tour = (props) => {
             </ul>
           </div>
           <div className={classes.overview}>
-            <span class="subheading">Tour Overview</span>
+            <span className="subheading">Tour Overview</span>
             <p>{props.tour.summary}</p>
             <p>{props.tour.description}</p>
 
             <div className={classes.tour_guides}>
-              <span class="subheading">tour guides</span>
+              <span className="subheading">tour guides</span>
               <div className={classes.guides_details}>
                 {props.tour.guides.map((el, index) => (
-                  <figure className={classes.tour_guide}>
+                  <figure key={index} className={classes.tour_guide}>
                     <img
                       className={classes.guide_img}
                       src={`https://tours-booking-app-api.onrender.com/images/users/${el.photo}`}
@@ -136,7 +146,7 @@ const Tour = (props) => {
       </section>
       <section>
         <div className="container">
-          <span class="heading-tertiary">Tour Gallery</span>
+          <span className="heading-tertiary">Tour Gallery</span>
           <div className={classes.carousel}>
             <Carousel infiniteLoop autoPlay>
               {props.tour.images.map((img, index) => (
@@ -154,7 +164,9 @@ const Tour = (props) => {
       <section className="container">
         <div className={classes.review}>
           <Reviews
-            reviews={props.reviews}
+            status={status}
+            error={error}
+            reviews={data}
             ratings={props.tour.averageRatings}
             ratingsQuantity={props.tour.ratingsQuantity}
           />

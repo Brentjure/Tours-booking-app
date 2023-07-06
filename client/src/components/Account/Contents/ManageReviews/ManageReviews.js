@@ -44,8 +44,7 @@ const ManageReviews = () => {
 
   const deleteReviewHandler = async (reviewId) => {
     try {
-      const results = await deleteReview({ reviewId, token });
-      console.log(results);
+      await deleteReview({ reviewId, token });
       UICtx.showNotification({
         status: 'success',
         message: 'Review deleted successfully!',
@@ -84,7 +83,6 @@ const ManageReviews = () => {
           <div
             className={classes.action}
             onClick={(e) => {
-              console.log(review.id);
               deleteReviewHandler(review.id);
             }}
           >

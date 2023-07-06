@@ -1,11 +1,21 @@
 import { useState, useRef } from 'react';
 import { IoAddOutline } from 'react-icons/io5';
+import Select from 'react-select';
 
 import classes from './TourForm.module.css';
-import { updateTour } from '../../../../lib/api';
 import { createFormData } from '../../../../lib/createFormData';
 
-const TourForm = ({ tour, createTour }) => {
+let tourGuides;
+
+const TourForm = ({
+  tour,
+  editTour,
+  createTour,
+  guidesOptns,
+  leadGuidesOptns,
+  editStatus,
+  createTourStatus,
+}) => {
   const [locations, setLocations] = useState([
     {
       address: '',
@@ -19,6 +29,8 @@ const TourForm = ({ tour, createTour }) => {
   const [enteredImage2, setEnteredImage2] = useState();
   const [enteredImage3, setEnteredImage3] = useState();
   const [startDates, setStartDates] = useState(['']);
+  const [guides, setGuides] = useState([]);
+  const [leadGuide, setLeadGuide] = useState();
 
   const nameInputRef = useRef();
   const durationInputRef = useRef();
@@ -32,7 +44,6 @@ const TourForm = ({ tour, createTour }) => {
   const startLocationDescriptionInputRef = useRef();
   const startLocationLatInputRef = useRef();
   const startLocationLongInputRef = useRef();
-  const guidesInputRef = useRef();
 
   const InputChangeHandler = (index, e) => {
     let data = [...locations];
@@ -82,39 +93,63 @@ const TourForm = ({ tour, createTour }) => {
       address: el.address,
     }));
 
-    const enteredTour = {
-      startLocation: {
-        type: 'Point',
-        coordinates: [
-          startLocationLongInputRef.current.value,
-          startLocationLatInputRef.current.value,
-        ],
-        description: startLocationDescriptionInputRef.current.value,
-        address: startLocationAddressInputRef.current.value,
-      },
-      name: nameInputRef.current.value,
-      duration: durationInputRef.current.value,
-      maxGroupSize: groupSizeInputRef.current.value,
-      difficulty: difficultyInputRef.current.value,
-      price: priceInputRef.current.value,
-      priceDiscount: priceDiscountInputRef.current.value,
-      summary: summaryInputRef.current.value,
-      description: descriptionInputRef.current.value,
-    };
+    tourGuides = [...guides, leadGuide].map((el) => (el ? el.value : ''));
 
-    const images = [enteredImage1, enteredImage2, enteredImage3];
-
-    const form = createFormData(
-      enteredTour,
-      enteredLocations,
-      startDates,
-      enteredImageCover,
-      images
-    );
     if (tour) {
-      const tourId = tour.id;
-      updateTour({ form, tourId });
+      const enteredTour = {
+        name: nameInputRef.current.value,
+        duration: durationInputRef.current.value,
+        maxGroupSize: groupSizeInputRef.current.value,
+        difficulty: difficultyInputRef.current.value,
+        price: priceInputRef.current.value,
+        priceDiscount: priceDiscountInputRef.current.value,
+        summary: summaryInputRef.current.value,
+        description: descriptionInputRef.current.value,
+        guides: tourGuides,
+      };
+
+      let images = [
+        enteredImage1 ? enteredImage1 : tour.images[0],
+        enteredImage1 ? enteredImage1 : tour.images[1],
+        enteredImage1 ? enteredImage1 : tour.images[2],
+      ];
+
+      let imgCover = enteredImageCover;
+      if (!enteredImageCover) imgCover = tour.imageCover;
+
+      const form = createFormData(enteredTour, null, null, imgCover, images);
+      editTour(form);
     } else {
+      const enteredTour = {
+        startLocation: {
+          type: 'Point',
+          coordinates: [
+            startLocationLongInputRef.current.value,
+            startLocationLatInputRef.current.value,
+          ],
+          description: startLocationDescriptionInputRef.current.value,
+          address: startLocationAddressInputRef.current.value,
+        },
+        name: nameInputRef.current.value,
+        duration: durationInputRef.current.value,
+        maxGroupSize: groupSizeInputRef.current.value,
+        difficulty: difficultyInputRef.current.value,
+        price: priceInputRef.current.value,
+        priceDiscount: priceDiscountInputRef.current.value,
+        summary: summaryInputRef.current.value,
+        description: descriptionInputRef.current.value,
+        guides: tourGuides,
+      };
+
+      const images = [enteredImage1, enteredImage2, enteredImage3];
+
+      const form = createFormData(
+        enteredTour,
+        enteredLocations,
+        startDates,
+        enteredImageCover,
+        images
+      );
       createTour(form);
     }
   };
@@ -194,11 +229,13 @@ const TourForm = ({ tour, createTour }) => {
             defaultValue={tour ? `${tour.name}` : ''}
           />
         </div>
-        <div>{dates}</div>
-        <span className={classes.toggleLocation} onClick={addstartDate}>
-          <IoAddOutline className={classes.addTourIcon} />
-          Add start date...
-        </span>
+        {!tour && <div>{dates}</div>}
+        {!tour && (
+          <span className={classes.toggleLocation} onClick={addstartDate}>
+            <IoAddOutline className={classes.addTourIcon} />
+            Add start date...
+          </span>
+        )}
         <div>
           <label htmlFor="difficut">Duration</label>
           <input
@@ -222,14 +259,39 @@ const TourForm = ({ tour, createTour }) => {
             <option value="difficult">Difficult</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="guides">Tour Guides</label>
-          <select name="guides" id="guides" multiple ref={guidesInputRef}>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="difficult">Difficult</option>
-          </select>
-        </div>
+        {leadGuidesOptns && (
+          <div>
+            <label htmlFor="lead-guide">Lead Guide:</label>
+            <Select
+              defaultValue={[leadGuidesOptns[1]]}
+              // isMulti
+              name="lead-guide"
+              options={leadGuidesOptns}
+              className="basic-select"
+              classNamePrefix="select"
+              onChange={(e) => {
+                setLeadGuide(e);
+              }}
+            />
+          </div>
+        )}
+        {guidesOptns && (
+          <div>
+            <label htmlFor="guides">Tour Guides (Atleast 3):</label>
+            <Select
+              defaultValue={[guidesOptns[1]]}
+              isMulti
+              name="guides"
+              options={guidesOptns}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              onChange={(e) => {
+                setGuides(e);
+              }}
+            />
+          </div>
+        )}
+
         <div>
           <label htmlFor="group-size">Group Size</label>
           <input
@@ -270,7 +332,6 @@ const TourForm = ({ tour, createTour }) => {
             // value={enteredImageCover}
             onChange={(e) => {
               setEnteredImageCover(e.target.files[0]);
-              console.log('image cover', e.target.files[0]);
             }}
           />
         </div>
@@ -308,44 +369,48 @@ const TourForm = ({ tour, createTour }) => {
           />
         </div>
       </div>
-      <p className="heading-tertiary">Start Location:</p>
-      <div className={classes.locations}>
-        <input
-          type="text"
-          id="address"
-          placeholder="adress"
-          defaultValue={tour ? `${tour.startLocation.address}` : ''}
-          ref={startLocationAddressInputRef}
-        />
-        <input
-          type="text"
-          id="description"
-          placeholder="description"
-          defaultValue={tour ? `${tour.startLocation.description}` : ''}
-          ref={startLocationDescriptionInputRef}
-        />
-        <input
-          type="number"
-          id="latitude"
-          placeholder="latitude"
-          ref={startLocationLatInputRef}
-          defaultValue={tour ? `${tour.startLocation.coordinates[1]}` : ''}
-        />
-        <input
-          type="number"
-          id="longitude"
-          placeholder="Longitude"
-          ref={startLocationLongInputRef}
-          defaultValue={tour ? `${tour.startLocation.coordinates[0]}` : ''}
-        />
-      </div>
+      {!tour && <p className="heading-tertiary">Start Location:</p>}
+      {!tour && (
+        <div className={classes.locations}>
+          <input
+            type="text"
+            id="address"
+            placeholder="adress"
+            defaultValue={tour ? `${tour.startLocation.address}` : ''}
+            ref={startLocationAddressInputRef}
+          />
+          <input
+            type="text"
+            id="description"
+            placeholder="description"
+            defaultValue={tour ? `${tour.startLocation.description}` : ''}
+            ref={startLocationDescriptionInputRef}
+          />
+          <input
+            type="number"
+            id="latitude"
+            placeholder="latitude"
+            ref={startLocationLatInputRef}
+            defaultValue={tour ? `${tour.startLocation.coordinates[1]}` : ''}
+          />
+          <input
+            type="number"
+            id="longitude"
+            placeholder="Longitude"
+            ref={startLocationLongInputRef}
+            defaultValue={tour ? `${tour.startLocation.coordinates[0]}` : ''}
+          />
+        </div>
+      )}
 
-      <p className="heading-tertiary">Tour Location(s):</p>
-      {tourLocations}
-      <span className={classes.toggleLocation} onClick={addLocations}>
-        <IoAddOutline className={classes.addTourIcon} />
-        Add Location...
-      </span>
+      {!tour && <p className="heading-tertiary">Tour Location(s):</p>}
+      {!tour && tourLocations}
+      {!tour && (
+        <span className={classes.toggleLocation} onClick={addLocations}>
+          <IoAddOutline className={classes.addTourIcon} />
+          Add Location...
+        </span>
+      )}
       <div>
         <label htmlFor="summary">Summary</label>
         <textarea
@@ -365,9 +430,16 @@ const TourForm = ({ tour, createTour }) => {
         ></textarea>
       </div>
       <div className={classes.btn_form}>
-        <button className={'btn'} type="submit" onClick={submitFormHandler}>
-          Add Tour
-        </button>
+        {tour && (
+          <button className="button" type="submit" onClick={submitFormHandler}>
+            {editStatus === 'pending' ? 'Loading' : 'Edit Tour'}
+          </button>
+        )}
+        {!tour && (
+          <button className="button" type="submit" onClick={submitFormHandler}>
+            {createTourStatus === 'pending' ? 'Loading' : 'Add Tour'}
+          </button>
+        )}
       </div>
     </form>
   );

@@ -9,12 +9,21 @@
   /* border-bottom: solid 1px #eee; */
   box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.05);
 }
-
+.navlogo {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: #d31e3d;
+  text-decoration: none;
+}
 .logo {
   font-weight: 700;
   font-size: 2.4rem;
-  color: inherit;
+  color: #d31e3d;
   text-decoration: none;
+  height: 2.4rem;
 }
 
 .sticky {

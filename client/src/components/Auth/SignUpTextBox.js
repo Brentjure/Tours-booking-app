@@ -72,7 +72,7 @@ const SignUpTextBox = ({ onClose, onToggle, signUp, status, user, error }) => {
           />
         </div>
 
-        <button class="button btn--form">
+        <button className="button btn--form">
           {status === 'pending' ? 'Processing' : 'Sign up now!'}
         </button>
       </form>

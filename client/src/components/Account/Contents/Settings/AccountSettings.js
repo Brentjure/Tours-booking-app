@@ -28,7 +28,6 @@ const AccountSettings = (props) => {
         updateUser(editedUser);
       }
     } catch (error) {
-      console.log(error);
       UICtx.showNotification({
         status: 'error',
         message: error.message,
@@ -37,8 +36,7 @@ const AccountSettings = (props) => {
   };
 
   const editPassword = async (data) => {
-    const updatedUser = await updateMe(data, token, 'password');
-    console.log(updateUser);
+    await updateMe(data, token, 'password');
   };
 
   return (

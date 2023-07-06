@@ -28,7 +28,7 @@ const Tour = (props) => {
               ></ion-icon>
               <span> {props.details.startLocation.description}</span>
             </li>
-            <li class={classes['tour-attribute']}>
+            <li className={classes['tour-attribute']}>
               <ion-icon
                 className={classes['tour-icon']}
                 name="calendar-clear-outline"

@@ -13,9 +13,6 @@ const FilterContainer = ({ filterTours, status }) => {
 
     const q = `search=${name}&price[lte]=${price}`;
 
-    console.log(name, price);
-    console.log(q);
-
     filterTours(q);
   };
 

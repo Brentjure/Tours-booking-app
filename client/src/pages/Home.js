@@ -6,7 +6,7 @@ import TourSection from '../components/TourSection/TourSection';
 import TestimonialsSection from '../components/TestimonialSection/TestimonialsSection';
 import CtaSection from '../components/CtaSection/CtaSection';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
-import { getAllReviews, getAllTours } from '../lib/api';
+import { getAllReviews } from '../lib/api';
 
 const HomePage = () => {
   const { reviews } = useLoaderData();
@@ -14,20 +14,20 @@ const HomePage = () => {
   return (
     <>
       <HeroSection />
-      {/* <Suspense
+      <TourSection />
+
+      <Suspense
         fallback={
           <div style={{ textAlign: 'center' }}>
             <LoadingSpinner />
           </div>
         }
       >
-        <Await resolve={tours}>
-          {(loadedTours) => <TourSection tours={loadedTours} />}
+        <Await resolve={reviews}>
+          {(loadedReviews) => <TestimonialsSection reviews={loadedReviews} />}
         </Await>
-      </Suspense> */}
-      <TourSection />
+      </Suspense>
 
-      <TestimonialsSection reviews={reviews} />
       <CtaSection />
     </>
   );
@@ -35,9 +35,8 @@ const HomePage = () => {
 
 export default HomePage;
 
-export const loader = async ({ request, params }) => {
+export const loader = ({ request, params }) => {
   return defer({
-    tours: getAllTours(),
-    reviews: await getAllReviews('page=1&limit=4&rating[gte]=4.5'),
+    reviews: getAllReviews('page=1&limit=4&rating[gte]=4.5'),
   });
 };

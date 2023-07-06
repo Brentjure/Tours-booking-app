@@ -1,0 +1,47 @@
+.table {
+  font-size: 1.8rem;
+  width: 100%;
+  margin: 1rem, 0;
+  /* border-spacing: 5rem; */
+}
+
+.rows {
+  margin-bottom: 2rem;
+}
+
+.headings {
+  width: 2.5rem;
+  text-align: left;
+}
+.name {
+  display: flex;
+  align-items: center;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #b71c1c;
+  background-color: #f4dddd;
+  border-radius: 3px;
+  padding: 1rem;
+  align-self: center;
+  cursor: pointer;
+  width: 70%;
+}
+
+.icon {
+  color: #b71c1c;
+  background-color: #f4dddd;
+  border: none;
+  font-size: 1.8rem;
+}
+/* Bellow 544px (Phones) */
+@media (max-width: 34em) {
+  .table {
+    /* margin: 4rem; */
+    font-size: 1.2rem;
+    overflow-x: scroll;
+  }
+}

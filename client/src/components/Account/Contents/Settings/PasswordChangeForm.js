@@ -14,7 +14,6 @@ const PasswordChangeForm = ({ editPassword }) => {
       password: newPassword,
       passwordConfirm: confirmPassword,
     };
-    console.log(enteredData);
 
     editPassword(JSON.stringify(enteredData));
   };
@@ -61,7 +60,9 @@ const PasswordChangeForm = ({ editPassword }) => {
         />
       </div>
       <div className={classes.btn_form}>
-        <button className="button form-btn">save password</button>
+        <button className="button form-btn" disabled={true}>
+          save password
+        </button>
       </div>
     </form>
   );

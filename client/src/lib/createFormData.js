@@ -22,29 +22,31 @@ export const createFormData = (
       form.append(key, enteredTour[key]);
     }
   }
-
-  enteredLocations.forEach((el, index) => {
-    for (let key in el) {
-      if (typeof el[key] === 'string') {
-        form.append(`locations[${index}][${key}]`, el[key]);
-      } else {
-        el[key].forEach((element, i) => {
-          form.append(`locations[${index}][${key}][${i}]`, element);
-        });
+  if (enteredLocations)
+    enteredLocations.forEach((el, index) => {
+      for (let key in el) {
+        if (typeof el[key] === 'string') {
+          form.append(`locations[${index}][${key}]`, el[key]);
+        } else {
+          el[key].forEach((element, i) => {
+            form.append(`locations[${index}][${key}][${i}]`, element);
+          });
+        }
       }
-    }
-  });
+    });
 
-  startDates.forEach((el, i) => {
-    form.append(`startDates[${i}]`, el);
-  });
+  if (startDates)
+    startDates.forEach((el, i) => {
+      form.append(`startDates[${i}]`, el);
+    });
+
   form.append('imageCover', enteredImageCover);
   images.forEach((el, i) => {
     form.append(`images`, el);
   });
 
-  for (const pair of form.entries()) {
-    console.log(pair[0] + ': ' + pair[1]);
-  }
+  // for (const pair of form.entries()) {
+  //   console.log(pair[0] + ': ' + pair[1]);
+  // }
   return form;
 };

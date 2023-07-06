@@ -66,14 +66,9 @@
     gap: 2.4rem;
   }
 
-  .main-nav-link:link,
-  .main-nav-link:visited {
-    font-size: 1.6rem;
-  }
-
   .user-img {
-    height: 3rem;
-    width: 3rem;
+    height: 4rem;
+    width: 4rem;
     /* align-self: center; */
   }
 

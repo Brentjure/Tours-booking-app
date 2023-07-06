@@ -4,7 +4,9 @@ import Home, { loader as toursLoader } from './pages/Home';
 import AccountSettings from './components/Account/Contents/Settings/AccountSettings';
 import ManageToursRoot from './pages/ManageToursRoot';
 import AllTours from './components/Account/Contents/ToursSettings/AllTours';
-import NewTour from './components/Account/Contents/ToursSettings/NewTour';
+import NewTour, {
+  loader as loadGuides,
+} from './components/Account/Contents/ToursSettings/NewTour';
 import EditTour, {
   loader as tourLoader,
 } from './components/Account/Contents/ToursSettings/EditTour';
@@ -15,6 +17,8 @@ import ManageReviews from './components/Account/Contents/ManageReviews/ManageRev
 import MyBookings from './components/Account/Contents/MyBookings/MyBokings';
 import ErrorPage from './pages/Error';
 import { action as logoutAction } from './pages/Logout';
+import ManageBookings from './components/Account/Contents/ManageBookings/ManageBookings';
+import PasswordReset from './pages/PasswordReset';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +48,7 @@ const router = createBrowserRouter([
           { index: true, element: <AccountSettings /> },
           { path: 'settings', element: <AccountSettings /> },
           { path: 'my-bookings', element: <MyBookings /> },
+          { path: 'manage-bookings', element: <ManageBookings /> },
           { path: 'manage-users', element: <ManageUsers /> },
           {
             path: 'manage-reviews',
@@ -64,7 +69,7 @@ const router = createBrowserRouter([
                 // children: [{ path: ':Id', element: <EditTour /> }],
               },
 
-              { path: 'new-tour', element: <NewTour /> },
+              { path: 'new-tour', element: <NewTour />, loader: loadGuides },
               {
                 path: ':Id',
                 element: <EditTour />,
@@ -75,7 +80,7 @@ const router = createBrowserRouter([
         ],
       },
       { path: 'logout', action: logoutAction },
-      { path: 'resetPassword/:token', action: logoutAction },
+      { path: 'resetPassword/:token', element: <PasswordReset /> },
     ],
   },
 ]);
