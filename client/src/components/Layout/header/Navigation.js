@@ -1,12 +1,11 @@
 import { useContext } from 'react';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import classes from './Navigation.module.css';
 import AuthContext from '../../../store/auth-context';
 
 const Navigation = (props) => {
   const authCtx = useContext(AuthContext);
-  const navigate = useNavigate();
   let user;
 
   if (authCtx.isLoggedIn) {
@@ -39,11 +38,14 @@ const Navigation = (props) => {
           <Link className={classes['main-nav-link']}>Tours</Link>
         </li> */}
         {authCtx.isLoggedIn && (
-          <li>
-            <Link to="/account/settings" className={account}>
-              <span>{`Hi, ${user.name.split(' ')[0]}`}</span>
-            </Link>
-          </li>
+          <Link to="/account/settings" className={account}>
+            <img
+              className={classes['user-img']}
+              src={`https://tours-booking-app-api.onrender.com/images/users/${user.photo}`}
+              alt="user"
+            />
+            <span>{`Hi, ${user.name.split(' ')[0]}`}</span>
+          </Link>
         )}
         {/* <li>
           <Link className={classes['main-nav-link']} onClick={props.onShowAuth}>
