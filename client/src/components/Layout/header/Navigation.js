@@ -41,11 +41,6 @@ const Navigation = (props) => {
         {authCtx.isLoggedIn && (
           <li>
             <Link to="/account/settings" className={account}>
-              <img
-                className={classes['user-img']}
-                src={`https://tours-booking-app-api.onrender.com/images/users/${user.photo}`}
-                alt="user"
-              />
               <span>{`Hi, ${user.name.split(' ')[0]}`}</span>
             </Link>
           </li>
