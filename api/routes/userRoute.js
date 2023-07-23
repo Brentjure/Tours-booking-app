@@ -14,7 +14,7 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 
 router.use(authController.protect);
 
-router.use('/:Id/myBookings', bookingsRouter);
+router.use('/:id/myBookings', bookingsRouter);
 
 router.patch('/updatePassword', authController.updatePassword);
 router.get('/me', userController.getMe, userController.getUser);
