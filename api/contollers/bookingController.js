@@ -30,7 +30,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         name: `${tour.name} Tour`,
         description: tour.summary,
         images: [
-          `${req.protocal}://${req.get('host')}/images/tour/${tour.imageCover}`,
+          `https://tours-booking-app-api.onrender.com/images/tour/${tour.imageCover}`,
         ],
         amount: tour.price * 100,
         currency: 'usd',
