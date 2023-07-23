@@ -16,12 +16,6 @@ const Header = () => {
       {UICtx.modal && <Auth onClose={UICtx.closeModal} />}
       <div className={classes.navbar}>
         <NavLink to="/" className={classes.navlogo}>
-          {/* tours. */}
-          <img
-            className={classes.logo}
-            src={`https://tours-booking-app-api.onrender.com/logo512.png`}
-            alt="logo"
-          />
           <p>tours</p>
         </NavLink>
         <Navigation onShowAuth={UICtx.openModal} />
